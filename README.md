@@ -1,4 +1,4 @@
-# 23700751_HuynhNhatTruong_capsystem
+# 23700751_HuynhNhatTruong_CABSYSTEM
 | STT | Yếu điểm                                             | Phân tích                                                                                                                                                        |
 | --- | ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1   | **Phân công tài xế chủ yếu thủ công**                | Việc tìm và phân công tài xế chưa được tự động hóa, gây mất thời gian và khó xử lý khi số lượng chuyến tăng.                                                     |
@@ -13,6 +13,7 @@
 | 10  | **Khả năng mở rộng và thay đổi còn hạn chế**         | Doanh nghiệp muốn bổ sung dịch vụ, phương thức thanh toán, nhà cung cấp thông báo hoặc thay đổi thành phần kỹ thuật mà không phải xây dựng lại toàn bộ hệ thống. |
 
 Tại sao cần hệ thống mới?
+
 Do những hạn chế trên, doanh nghiệp cần xây dựng một CAB System mới nhằm:
 
 Tự động hóa quy trình tìm và phân công tài xế dựa trên vị trí, trạng thái sẵn sàng và các tiêu chí vận hành.
@@ -64,3 +65,5 @@ Stakeholder Matrix
       THẤP       │ Nhóm phát    │ KHÁCH HÀNG         │
                  │ triển        │ TÀI XẾ              │
                  └──────────────┴────────────────────┘
+              
+
