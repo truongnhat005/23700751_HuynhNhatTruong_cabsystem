@@ -191,3 +191,8 @@ Functional Requirements – CAB System
 | **FR-07.04** | BR-07 – Quản lý sau chuyến đi | **Đánh giá tài xế**         | Hệ thống phải cho phép khách hàng đánh giá tài xế sau khi chuyến đi hoàn thành.       |
 | **FR-07.05** | BR-07 – Quản lý sau chuyến đi | **Lưu thông tin giao dịch** | Hệ thống phải lưu thông tin giao dịch để phục vụ việc tra cứu và quản lý.             |
 
+#B7: vẽ usecase 
+#B8: đặc tả usecases
+#B9: phân tích business process(phân tích quy trình nghiệp vụ)
+#B10: phân tích các quy tắc nghiệp vụ (businees rules)
+
