@@ -40,30 +40,28 @@ Dễ dàng phát triển trong tương lai, chẳng hạn như thêm loại dị
 
 
 B2. Xác định Stakeholder
-| STT | Stakeholder                           | Vai trò / Mối quan tâm                                                                                  |
-| --- | ------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| 1   | **Khách hàng**                        | Đăng ký, đặt xe, theo dõi chuyến đi, xem lịch sử, thanh toán và đánh giá tài xế.                        |
-| 2   | **Tài xế**                            | Quản lý hồ sơ, phương tiện, trạng thái hoạt động, nhận/từ chối chuyến và cập nhật trạng thái chuyến đi. |
-| 3   | **Nhân viên vận hành**                | Quản lý khách hàng, tài xế, phương tiện, chuyến đi và hỗ trợ xử lý các trường hợp lỗi.                  |
-| 4   | **Ban giám đốc**                      | Định hướng hệ thống và theo dõi các báo cáo về chuyến đi, doanh thu và hiệu quả hoạt động.              |
-| 5   | **Nhà cung cấp thanh toán bên ngoài** | Cung cấp dịch vụ xử lý thanh toán điện tử cho hệ thống CAB.                                             |
-| 6   | **Nhà cung cấp dịch vụ thông báo**    | Hỗ trợ gửi thông báo đến khách hàng và tài xế.                                                          |
-| 7   | **Business Analyst (BA)**             | Làm rõ các yêu cầu chưa được xác định và xác nhận yêu cầu với các bên liên quan trước khi phát triển.   |
-| 8   | **Nhóm phát triển hệ thống**          | Xây dựng hệ thống dựa trên các yêu cầu đã được phân tích và xác nhận.                                   |
+| STT | Stakeholder                   | Vai trò / Mối quan tâm                                                                       |
+| --- | ----------------------------- | -------------------------------------------------------------------------------------------- |
+| 1   | **Khách hàng**                | Đăng ký, đặt xe, theo dõi chuyến, xem lịch sử, thanh toán và đánh giá tài xế.                |
+| 2   | **Tài xế**                    | Quản lý hồ sơ, phương tiện, trạng thái hoạt động, nhận chuyến và cập nhật trạng thái chuyến. |
+| 3   | **Nhân viên vận hành**        | Quản lý khách hàng, tài xế, phương tiện, chuyến đi và xử lý sự cố.                           |
+| 4   | **Ban giám đốc**              | Đưa ra định hướng, theo dõi doanh thu, số lượng chuyến và hiệu quả hoạt động.                |
+| 5   | **Bộ phận tài chính/kế toán** | Quan tâm đến doanh thu, thanh toán, giao dịch và dữ liệu tài chính của hệ thống.             |
+| 6   | **Nhà cung cấp thanh toán**   | Cung cấp dịch vụ xử lý thanh toán điện tử bên ngoài.                                         |
+| 7   | **Business Analyst (BA)**     | Làm rõ các yêu cầu chưa được xác định và xác nhận yêu cầu với các bên liên quan.             |
+| 8   | **Nhóm phát triển hệ thống**  | Xây dựng và triển khai hệ thống dựa trên yêu cầu đã được xác nhận.                           |
 
 Stakeholder Matrix
-|                | **Interest thấp**                                                                                               | **Interest cao**                                                                                                                                             |
-| -------------- | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Power cao**  | **Nhà cung cấp thanh toán**  <br>Ảnh hưởng đến hoạt động thanh toán nhưng không sử dụng hệ thống CAB hằng ngày. | **Ban giám đốc**  <br>Đưa ra định hướng và kỳ vọng đối với hệ thống. <br><br> **Nhân viên vận hành**  <br>Trực tiếp quản lý và xử lý hoạt động của hệ thống. |
-| **Power thấp** | **Nhóm phát triển hệ thống**  <br>Thực hiện việc xây dựng hệ thống theo yêu cầu đã được xác định.               | **Khách hàng**  <br>Người sử dụng trực tiếp dịch vụ đặt xe. <br><br> **Tài xế**  <br>Người sử dụng trực tiếp hệ thống để nhận và thực hiện chuyến.           |
-                         INTEREST
+|                | **Interest thấp**                                                                                               | **Interest cao**                                                                                                                                                                    |
+| -------------- | --------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Power cao**  | **Nhà cung cấp thanh toán**  <br>Ảnh hưởng đến hoạt động thanh toán nhưng không sử dụng hệ thống CAB trực tiếp. | **Ban giám đốc**  <br>Đưa ra định hướng, mục tiêu và kỳ vọng đối với hệ thống. <br><br> **Nhân viên vận hành**  <br>Trực tiếp quản lý khách hàng, tài xế, phương tiện và chuyến đi. |
+| **Power thấp** | **Nhóm phát triển hệ thống**  <br>Xây dựng và triển khai hệ thống theo các yêu cầu đã được xác định.            | **Khách hàng**  <br>Người sử dụng trực tiếp dịch vụ đặt xe. <br><br> **Tài xế**  <br>Người sử dụng trực tiếp hệ thống để nhận và thực hiện chuyến.                                 |
+                           INTEREST
                     THẤP              CAO
                  ┌──────────────┬────────────────────┐
-      CAO        │ Nhà cung cấp │ BAN GIÁM ĐỐC       │
-                 │ thanh toán   │ NHÂN VIÊN VẬN HÀNH │
+      CAO        │ NHÀ CUNG CẤP │ BAN GIÁM ĐỐC       │
+                 │ THANH TOÁN   │ NHÂN VIÊN VẬN HÀNH │
      POWER       ├──────────────┼────────────────────┤
-      THẤP       │ Nhóm phát    │ KHÁCH HÀNG         │
-                 │ triển        │ TÀI XẾ              │
+      THẤP       │ NHÓM PHÁT    │ KHÁCH HÀNG         │
+                 │ TRIỂN        │ TÀI XẾ              │
                  └──────────────┴────────────────────┘
-              
-
