@@ -1,4 +1,5 @@
 # 23700751_HuynhNhatTruong_CABSYSTEM
+# Giai đoạn 1
 | STT | Yếu điểm                                             | Phân tích                                                                                                                                                        |
 | --- | ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1   | **Phân công tài xế chủ yếu thủ công**                | Việc tìm và phân công tài xế chưa được tự động hóa, gây mất thời gian và khó xử lý khi số lượng chuyến tăng.                                                     |
@@ -12,7 +13,7 @@
 | 9   | **Khó khăn trong công tác vận hành**                 | Nhân viên vận hành cần một giao diện quản trị để quản lý khách hàng, tài xế, phương tiện và chuyến đi.                                                           |
 | 10  | **Khả năng mở rộng và thay đổi còn hạn chế**         | Doanh nghiệp muốn bổ sung dịch vụ, phương thức thanh toán, nhà cung cấp thông báo hoặc thay đổi thành phần kỹ thuật mà không phải xây dựng lại toàn bộ hệ thống. |
 
-Tại sao cần hệ thống mới?
+**Tại sao cần hệ thống mới?**
 
 Do những hạn chế trên, doanh nghiệp cần xây dựng một CAB System mới nhằm:
 
@@ -39,7 +40,7 @@ Có khả năng mở rộng độc lập, hạn chế việc một lỗi ở tha
 Dễ dàng phát triển trong tương lai, chẳng hạn như thêm loại dịch vụ, phương thức thanh toán hoặc nhà cung cấp thông báo.
 
 
-B2. Xác định Stakeholder
+# Giai đoạn 2 Xác định Stakeholder
 | STT | Stakeholder                   | Vai trò / Mối quan tâm                                                                       |
 | --- | ----------------------------- | -------------------------------------------------------------------------------------------- |
 | 1   | **Khách hàng**                | Đăng ký, đặt xe, theo dõi chuyến, xem lịch sử, thanh toán và đánh giá tài xế.                |
@@ -77,7 +78,7 @@ quadrantChart
     "Tài xế": [0.80, 0.40]
     "Nhóm phát triển": [0.30, 0.25]
 ```
-#B3
+# Giai đoạn 3
 | ID       | Business Goal                                           | Mô tả chi tiết                                                                                                                                                                                                     |
 | -------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **BG01** | **Tự động hóa quy trình đặt xe và phân công tài xế**    | Tự động xác định tài xế phù hợp dựa trên vị trí, trạng thái sẵn sàng và các tiêu chí vận hành. Khi tài xế không phản hồi hoặc từ chối, hệ thống tiếp tục tìm tài xế khác mà khách hàng không phải tạo lại yêu cầu. |
@@ -91,7 +92,7 @@ quadrantChart
 | **BG09** | **Tạo nền tảng có khả năng phát triển lâu dài**         | Cho phép bổ sung loại dịch vụ mới, phương thức thanh toán mới, nhà cung cấp thông báo mới hoặc thay đổi thành phần kỹ thuật mà không phải xây dựng lại toàn bộ ứng dụng.                                           |
 | **BG10** | **Hỗ trợ phối hợp giữa các bộ phận**                    | Cho phép các bộ phận trong doanh nghiệp phối hợp thông qua hệ thống và có đủ dữ liệu để theo dõi hoạt động.|                                                      
 
-#B4
+# Giai đoạn 4
 | STT   | Chức năng cốt lõi                | Nội dung chính                                                                                                  |
 | ----- | -------------------------------- | --------------------------------------------------------------------------------------------------------------- |
 | **1** | **Quản lý tài khoản**            | Đăng ký, đăng nhập, cập nhật thông tin khách hàng và tài xế.                                                    |
@@ -102,7 +103,7 @@ quadrantChart
 | **6** | **Thông báo**                    | Thông báo cho khách hàng và tài xế về các sự kiện quan trọng của chuyến đi và thanh toán.                       |
 | **7** | **Quản lý sau chuyến đi**        | Lưu lịch sử chuyến, hiển thị số tiền phải trả và cho phép khách hàng đánh giá tài xế.                           |
 
-#B5
+# Giai đoạn 5
 | **ID**    | **Chức năng cốt lõi**            | **Business Requirement**                                                                   | **Chi tiết yêu cầu**                                                                                                                                                                                                                                                                                        |
 | --------- | -------------------------------- | ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **BR-01** | **Quản lý tài khoản**            | Hệ thống phải hỗ trợ quản lý tài khoản của khách hàng và tài xế.                           | Cho phép khách hàng đăng ký, đăng nhập và cập nhật thông tin cá nhân. Tài xế có thể đăng ký hoặc được nhân viên vận hành tạo tài khoản, cập nhật hồ sơ và thông tin phương tiện. Người dùng phải được xác thực trước khi sử dụng các chức năng yêu cầu tài khoản.                                           |
@@ -113,7 +114,7 @@ quadrantChart
 | **BR-06** | **Thông báo**                    | Hệ thống phải cung cấp thông báo cho khách hàng và tài xế trong quá trình sử dụng dịch vụ. | Khách hàng nhận thông báo khi yêu cầu được tiếp nhận, tài xế nhận chuyến, tài xế đến điểm đón, chuyến hoàn thành và thanh toán có kết quả. Tài xế nhận thông báo về chuyến mới và các thay đổi liên quan đến chuyến đang thực hiện.                                                                         |
 | **BR-07** | **Quản lý sau chuyến đi**        | Hệ thống phải hỗ trợ quản lý thông tin sau khi chuyến đi hoàn thành.                       | Khách hàng có thể xem lịch sử chuyến đi, số tiền phải trả và đánh giá tài xế. Hệ thống lưu thông tin chuyến và giao dịch để phục vụ việc tra cứu và quản lý.                                                                                                                                               |
 
-#B6
+# Giai đoạn 6
 Functional Requirements – CAB System
 | **ID**       | **Business Requirement**  | **Functional Requirement**        | **Mô tả chức năng**                                                                                        |
 | ------------ | ------------------------- | --------------------------------- | ---------------------------------------------------------------------------------------------------------- |
@@ -191,11 +192,11 @@ Functional Requirements – CAB System
 | **FR-07.04** | BR-07 – Quản lý sau chuyến đi | **Đánh giá tài xế**         | Hệ thống phải cho phép khách hàng đánh giá tài xế sau khi chuyến đi hoàn thành.       |
 | **FR-07.05** | BR-07 – Quản lý sau chuyến đi | **Lưu thông tin giao dịch** | Hệ thống phải lưu thông tin giao dịch để phục vụ việc tra cứu và quản lý.             |
 
-#B7: vẽ usecase 
+# Giai đoạn 7: Vẽ usecase 
 
-#B8: đặc tả usecases
+# Giai đoạn 8: Đặc tả usecases
 
-#B9: phân tích business process(phân tích quy trình nghiệp vụ)
+# Giai đoạn 9: Phân tích business process(phân tích quy trình nghiệp vụ)
 
-#B10: phân tích các quy tắc nghiệp vụ (businees rules)
+# Giai đoạn 10: Phân tích các quy tắc nghiệp vụ (businees rules)
 
