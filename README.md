@@ -758,5 +758,116 @@ flowchart TB
 
 # Giai đoạn 9: Phân tích Business Process (phân tích quy trình nghiệp vụ)
 
+**UC01**
+```mermaid
+flowchart LR
+
+    subgraph ACTOR["KHÁCH HÀNG / TÀI XẾ"]
+        direction TB
+
+        A1((Bắt đầu))
+        A2["1. Chọn Đăng ký"]
+        A3["3. Nhập thông tin tài khoản"]
+        A4["5. Nhấn Đăng ký"]
+        A5["7. Chọn Đăng nhập"]
+        A6["9. Nhập tài khoản và mật khẩu"]
+        A7["11. Chọn Cập nhật thông tin"]
+        A8["13. Chỉnh sửa thông tin cá nhân"]
+        A9["15. Nhấn Lưu"]
+        A10((Kết thúc))
+
+        A1 --> A2
+        A2 --> A3
+        A3 --> A4
+        A4 --> A5
+        A5 --> A6
+        A6 --> A7
+        A7 --> A8
+        A8 --> A9
+        A9 --> A10
+    end
+
+    subgraph SYSTEM["CAB SYSTEM"]
+        direction TB
+
+        S1["2. Hiển thị form đăng ký"]
+        S2["4. Kiểm tra thông tin"]
+        D1{"Thông tin hợp lệ?"}
+        S3["6. Tạo tài khoản và lưu dữ liệu"]
+
+        S4["8. Hiển thị form đăng nhập"]
+        S5["10. Xác thực tài khoản"]
+        D2{"Đăng nhập thành công?"}
+
+        S6["12. Hiển thị thông tin cá nhân"]
+        S7["14. Kiểm tra thông tin cập nhật"]
+        D3{"Thông tin hợp lệ?"}
+
+        S8["16. Lưu thông tin thay đổi"]
+        S9["17. Thông báo thành công"]
+
+        S1 --> S2
+        S2 --> D1
+        D1 -->|Có| S3
+        S3 --> S4
+        S4 --> S5
+        S5 --> D2
+        D2 -->|Có| S6
+        S6 --> S7
+        S7 --> D3
+        D3 -->|Có| S8
+        S8 --> S9
+    end
+
+    %% LIÊN KẾT GIỮA ACTOR VÀ SYSTEM
+
+    A2 --> S1
+    S1 --> A3
+
+    A4 --> S2
+    S3 --> A5
+
+    A6 --> S5
+    D2 --> A7
+
+    A8 --> S7
+    D3 --> A9
+
+    S9 --> A10
+
+    %% LUỒNG THAY THẾ
+
+    D1 -->|Không| E1["Thông báo lỗi<br/>Nhập lại thông tin"]
+    E1 --> A3
+
+    D2 -->|Không| E2["Thông báo đăng nhập thất bại"]
+    E2 --> A6
+
+    D3 -->|Không| E3["Thông báo lỗi<br/>Kiểm tra lại thông tin"]
+    E3 --> A8
+
+    %% LUỒNG NGOẠI LỆ
+
+    S3 -.-> E4["Lỗi lưu dữ liệu"]
+    S8 -.-> E4
+
+    %% STYLE
+
+    style ACTOR fill:#ffffff,stroke:#222222,stroke-width:2px
+    style SYSTEM fill:#ffffff,stroke:#222222,stroke-width:2px
+
+    style A1 fill:#222222,color:#ffffff,stroke:#222222
+    style A10 fill:#222222,color:#ffffff,stroke:#222222
+
+    style D1 fill:#fff2cc,stroke:#222222,stroke-width:2px
+    style D2 fill:#fff2cc,stroke:#222222,stroke-width:2px
+    style D3 fill:#fff2cc,stroke:#222222,stroke-width:2px
+
+    style E1 fill:#f8d7da,stroke:#222222
+    style E2 fill:#f8d7da,stroke:#222222
+    style E3 fill:#f8d7da,stroke:#222222
+    style E4 fill:#f8d7da,stroke:#222222
+```
+
 # Giai đoạn 10: Phân tích Businsess Rules (quy tắc nghiệp vụ)
 
