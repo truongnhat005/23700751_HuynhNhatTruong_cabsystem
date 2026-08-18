@@ -272,7 +272,111 @@ Functional Requirements – CAB System
 | **FR-16.05** | BR-16 – Báo cáo hoạt động | **Báo cáo hiệu quả tài xế**  | Hệ thống phải cung cấp dữ liệu đánh giá hiệu quả hoạt động của tài xế.   |
 
 # Giai đoạn 7: Vẽ usecase 
+```mermaid
+flowchart TB
 
+    %% ================= ACTORS =================
+
+    KH[Khách hàng]
+    TX[Tài xế]
+    NV[Nhân viên vận hành]
+
+    TC[Bộ phận Tài chính / Kế toán]
+    BGD[Ban giám đốc]
+    PAY[Nhà cung cấp thanh toán]
+
+
+    %% ================= SYSTEM =================
+
+    subgraph CAB[CAB SYSTEM]
+
+        U1([Quản lý tài khoản])
+        U2([Đặt xe])
+        U3([Tự động tìm tài xế])
+        U4([Xử lý nhận chuyến])
+
+        U5([Theo dõi chuyến đi])
+        U6([Quản lý trạng thái chuyến])
+        U7([Tính cước])
+        U8([Thanh toán])
+
+        U9([Quản lý giao dịch])
+        U10([Thông báo])
+        U11([Đánh giá tài xế])
+
+        U12([Quản lý khách hàng])
+        U13([Quản lý tài xế])
+        U14([Quản lý phương tiện])
+
+        U15([Theo dõi chuyến đang diễn ra])
+        U16([Xử lý chuyến lỗi])
+
+        U17([Quản lý tài chính])
+        U18([Báo cáo hoạt động])
+
+        U1 ~~~ U2
+        U2 ~~~ U3
+        U3 ~~~ U4
+
+        U5 ~~~ U6
+        U6 ~~~ U7
+        U7 ~~~ U8
+
+        U9 ~~~ U10
+        U10 ~~~ U11
+
+        U12 ~~~ U13
+        U13 ~~~ U14
+
+        U15 ~~~ U16
+        U16 ~~~ U17
+        U17 ~~~ U18
+    end
+
+
+    %% ================= CUSTOMER =================
+
+    KH --- U1
+    KH --- U2
+    KH --- U5
+    KH --- U8
+    KH --- U11
+
+
+    %% ================= DRIVER =================
+
+    TX --- U1
+    TX --- U4
+    TX --- U6
+    TX --- U13
+    TX --- U14
+
+
+    %% ================= OPERATION =================
+
+    NV --- U12
+    NV --- U13
+    NV --- U14
+    NV --- U15
+    NV --- U16
+
+
+    %% ================= FINANCE =================
+
+    TC --- U9
+    TC --- U17
+
+
+    %% ================= MANAGEMENT =================
+
+    BGD --- U18
+
+
+    %% ================= PAYMENT =================
+
+    PAY --- U8
+    PAY --- U9
+```
 # Giai đoạn 8: Đặc tả usecases
 
 # Giai đoạn 9: Phân tích business process(phân tích quy trình nghiệp vụ)
