@@ -758,5 +758,5 @@ flowchart TB
 
 # Giai đoạn 9: Phân tích Business Process (phân tích quy trình nghiệp vụ)
 
-# Giai đoạn 10: Phân tích Businses Rules (quy tắc nghiệp vụ)
+# Giai đoạn 10: Phân tích Businsess Rules (quy tắc nghiệp vụ)
 
