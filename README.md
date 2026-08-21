@@ -271,110 +271,111 @@ Functional Requirements – CAB System
 | **FR-16.05** | BR-16 – Báo cáo hoạt động | **Báo cáo hiệu quả tài xế**  | Hệ thống phải cung cấp dữ liệu đánh giá hiệu quả hoạt động của tài xế.   |
 
 # Giai đoạn 7: Vẽ usecase 
+
 ```mermaid
-flowchart TB
-
-    %% ================= ACTORS =================
-
-    KH[Khách hàng]
-    TX[Tài xế]
-    NV[Nhân viên vận hành]
-
-    TC[Bộ phận Tài chính / Kế toán]
-    BGD[Ban giám đốc]
-    PAY[Nhà cung cấp thanh toán]
-
-
-    %% ================= SYSTEM =================
-
-    subgraph CAB[CAB SYSTEM]
-
-        U1([Quản lý tài khoản])
-        U2([Đặt xe])
-        U3([Tự động tìm tài xế])
-        U4([Xử lý nhận chuyến])
-
-        U5([Theo dõi chuyến đi])
-        U6([Quản lý trạng thái chuyến])
-        U7([Tính cước])
-        U8([Thanh toán])
-
-        U9([Quản lý giao dịch])
-        U10([Thông báo])
-        U11([Đánh giá tài xế])
-
-        U12([Quản lý khách hàng])
-        U13([Quản lý tài xế])
-        U14([Quản lý phương tiện])
-
-        U15([Theo dõi chuyến đang diễn ra])
-        U16([Xử lý chuyến lỗi])
-
-        U17([Quản lý tài chính])
-        U18([Báo cáo hoạt động])
-
-        U1 ~~~ U2
-        U2 ~~~ U3
-        U3 ~~~ U4
-
-        U5 ~~~ U6
-        U6 ~~~ U7
-        U7 ~~~ U8
-
-        U9 ~~~ U10
-        U10 ~~~ U11
-
-        U12 ~~~ U13
-        U13 ~~~ U14
-
-        U15 ~~~ U16
-        U16 ~~~ U17
-        U17 ~~~ U18
+flowchart TD
+    subgraph KH [Khách hàng]
+        A1[Đăng ký / Đăng nhập]
+        A2[Cập nhật thông tin cá nhân]
+        A3[Đặt xe]
+        A4[Theo dõi chuyến đi]
+        A5[Thanh toán]
+        A6[Đánh giá tài xế]
     end
 
+    subgraph TX [Tài xế]
+        B1[Đăng ký / Đăng nhập]
+        B2[Quản lý hồ sơ tài xế]
+        B3[Quản lý phương tiện]
+        B4[Nhận / Từ chối chuyến]
+        B5[Quản lý trạng thái chuyến]
+    end
 
-    %% ================= CUSTOMER =================
+    subgraph NV [Nhân viên vận hành]
+        C1[Quản lý khách hàng]
+        C2[Quản lý tài xế]
+        C3[Quản lý phương tiện]
+        C4[Quản lý chuyến đi]
+        C5[Xử lý chuyến lỗi]
+    end
 
-    KH --- U1
-    KH --- U2
-    KH --- U5
-    KH --- U8
-    KH --- U11
+    subgraph TC [Bộ phận Tài chính / Kế toán]
+        D1[Quản lý giao dịch]
+        D2[Quản lý tài chính]
+    end
 
+    subgraph BGD [Ban giám đốc]
+        E1[Báo cáo hoạt động]
+    end
 
-    %% ================= DRIVER =================
+    subgraph PAY [Nhà cung cấp thanh toán]
+        F1[Thanh toán]
+        F2[Quản lý giao dịch]
+    end
 
-    TX --- U1
-    TX --- U4
-    TX --- U6
-    TX --- U13
-    TX --- U14
+    subgraph HT [CAB SYSTEM]
+        UC1[Quản lý tài khoản]
+        UC2[Cập nhật thông tin cá nhân]
+        UC3[Quản lý hồ sơ tài xế]
+        UC4[Quản lý phương tiện]
+        UC5[Đặt xe]
+        UC6[Tự động tìm tài xế]
+        UC7[Nhận / Từ chối chuyến]
+        UC8[Theo dõi chuyến đi]
+        UC9[Quản lý trạng thái chuyến]
+        UC10[Tính cước]
+        UC11[Thanh toán]
+        UC12[Quản lý giao dịch]
+        UC13[Gửi thông báo]
+        UC14[Đánh giá tài xế]
+        UC15[Quản lý khách hàng]
+        UC16[Quản lý chuyến đi]
+        UC17[Xử lý chuyến lỗi]
+        UC18[Quản lý tài chính]
+        UC19[Báo cáo hoạt động]
+    end
 
+    %% Liên kết Khách hàng
+    A1 --> UC1
+    A2 --> UC2
+    A3 --> UC5
+    A4 --> UC8
+    A5 --> UC11
+    A6 --> UC14
 
-    %% ================= OPERATION =================
+    %% Liên kết Tài xế
+    B1 --> UC1
+    B2 --> UC3
+    B3 --> UC4
+    B4 --> UC7
+    B5 --> UC9
 
-    NV --- U12
-    NV --- U13
-    NV --- U14
-    NV --- U15
-    NV --- U16
+    %% Liên kết Nhân viên vận hành
+    C1 --> UC15
+    C2 --> UC3
+    C3 --> UC4
+    C4 --> UC16
+    C5 --> UC17
 
+    %% Liên kết Tài chính / Kế toán
+    D1 --> UC12
+    D2 --> UC18
 
-    %% ================= FINANCE =================
+    %% Liên kết Ban giám đốc
+    E1 --> UC19
 
-    TC --- U9
-    TC --- U17
+    %% Liên kết Nhà cung cấp thanh toán
+    F1 --> UC11
+    F2 --> UC12
 
-
-    %% ================= MANAGEMENT =================
-
-    BGD --- U18
-
-
-    %% ================= PAYMENT =================
-
-    PAY --- U8
-    PAY --- U9
+    %% Quan hệ giữa các Use Case (Include / Extend)
+    UC5 -.->|«include»| UC6
+    UC6 -.->|«include»| UC7
+    UC9 -.->|«include»| UC10
+    UC10 -.->|«include»| UC11
+    UC11 -.->|«include»| UC12
+    UC9 -.->|«include»| UC13
+    UC14 -.->|«extend»| UC9
 ```
 # Giai đoạn 8: Đặc tả usecase
 
