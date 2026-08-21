@@ -51,7 +51,6 @@ Dễ dàng phát triển trong tương lai, chẳng hạn như thêm loại dị
 |       6 | **Quản trị hệ thống**              | Quản lý tài khoản, phân quyền, bảo mật và đảm bảo hệ thống hoạt động ổn định.                              |
 |       7 | **Nhà cung cấp thanh toán**        | Cung cấp dịch vụ xử lý thanh toán điện tử bên ngoài và trả kết quả giao dịch cho hệ thống.                 |
 |       8 | **Nhà cung cấp dịch vụ thông báo** | Cung cấp dịch vụ gửi thông báo đến khách hàng và tài xế thông qua các kênh được tích hợp.                  |
-|       9 | **Business Analyst (BA)**          | Thu thập, phân tích, làm rõ các yêu cầu chưa xác định và xác nhận yêu cầu với các bên liên quan.           |
 
 # Stakeholder Matrix
 |                | **Interest thấp**                                                                                                                                                                                                                    | **Interest cao**                                                                                                                                                                                                                                                                                                  |
