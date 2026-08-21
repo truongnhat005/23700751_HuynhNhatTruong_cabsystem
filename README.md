@@ -758,116 +758,136 @@ flowchart TD
 
 # Giai đoạn 9: Phân tích Business Process (phân tích quy trình nghiệp vụ)
 
-**UC01**
+# Quản lý Tài khoản & Xác thực (Đại diện UC01)
 ```mermaid
-flowchart LR
+flowchart TD
+    Start([Bắt đầu]) --> Choice{Người dùng đã có tài khoản?}
+    Choice -- Chưa --> Reg[Thực hiện Đăng ký tài khoản mới] --> InputReg[Nhập thông tin cá nhân & Vai trò] --> SaveReg[Hệ thống lưu tài khoản]
+    Choice -- Đã có --> Login[Thực hiện Đăng nhập]
+    SaveReg --> Login
+    
+    Login --> InputLog[Nhập tài khoản & Mật khẩu] --> Verify[Hệ thống xác thực thông tin]
+    Verify --> CheckVal{Hợp lệ?}
+    CheckVal -- Không --> Err[Thông báo lỗi & Yêu cầu nhập lại] --> InputLog
+    CheckVal -- Có --> Auth[Hệ thống phân quyền theo vai trò: Khách hàng / Tài xế / Nhân viên] --> End([Kết thúc: Truy cập hệ thống thành công])
+```
 
-    subgraph ACTOR["KHÁCH HÀNG / TÀI XẾ"]
-        direction TB
-
-        A1((Bắt đầu))
-        A2["1. Chọn Đăng ký"]
-        A3["3. Nhập thông tin tài khoản"]
-        A4["5. Nhấn Đăng ký"]
-        A5["7. Chọn Đăng nhập"]
-        A6["9. Nhập tài khoản và mật khẩu"]
-        A7["11. Chọn Cập nhật thông tin"]
-        A8["13. Chỉnh sửa thông tin cá nhân"]
-        A9["15. Nhấn Lưu"]
-        A10((Kết thúc))
-
-        A1 --> A2
-        A2 --> A3
-        A3 --> A4
-        A4 --> A5
-        A5 --> A6
-        A6 --> A7
-        A7 --> A8
-        A8 --> A9
-        A9 --> A10
+# Đặt xe & Tự động tìm/phân công tài xế (Dựa trên UC02, UC03, UC04)
+```mermaid
+flowchart TD
+    subgraph KhachHang [Khách hàng]
+        A1([Bắt đầu]) --> A2[Nhập điểm đón, điểm đến & chọn loại xe]
+        A2 --> A3[Gửi yêu cầu đặt xe]
+        A3 --> A4{Hệ thống phản hồi?}
+        A4 -- Tìm thấy tài xế --> A5[Nhận thông tin tài xế & xe]
+        A4 -- Không tìm thấy --> A6[Nhận thông báo hủy yêu cầu] --> A7([Kết thúc])
     end
 
-    subgraph SYSTEM["CAB SYSTEM"]
-        direction TB
-
-        S1["2. Hiển thị form đăng ký"]
-        S2["4. Kiểm tra thông tin"]
-        D1{"Thông tin hợp lệ?"}
-        S3["6. Tạo tài khoản và lưu dữ liệu"]
-
-        S4["8. Hiển thị form đăng nhập"]
-        S5["10. Xác thực tài khoản"]
-        D2{"Đăng nhập thành công?"}
-
-        S6["12. Hiển thị thông tin cá nhân"]
-        S7["14. Kiểm tra thông tin cập nhật"]
-        D3{"Thông tin hợp lệ?"}
-
-        S8["16. Lưu thông tin thay đổi"]
-        S9["17. Thông báo thành công"]
-
-        S1 --> S2
-        S2 --> D1
-        D1 -->|Có| S3
-        S3 --> S4
-        S4 --> S5
-        S5 --> D2
-        D2 -->|Có| S6
-        S6 --> S7
-        S7 --> D3
-        D3 -->|Có| S8
-        S8 --> S9
+    subgraph CabSystem [CAB System]
+        B1[Tiếp nhận yêu cầu đặt xe] --> B2[Xác định tài xế đang sẵn sàng]
+        B2 --> B3[Lọc tài xế theo loại xe và tính khoảng cách gần nhất]
+        B3 --> B4{Còn tài xế phù hợp?}
+        B4 -- Không --> B5[Thông báo không tìm thấy tài xế]
+        B4 -- Có --> B6[Gửi yêu cầu nhận chuyến đến tài xế ưu tiên]
+        B6 --> B7{Tài xế phản hồi?}
+        B7 -- Đồng ý --> B8[Gán chuyến cho tài xế & Khóa yêu cầu]
+        B7 -- Từ chối / Timeout --> B9[Loại bỏ tài xế này khỏi danh sách] --> B3
     end
 
-    %% LIÊN KẾT GIỮA ACTOR VÀ SYSTEM
+    subgraph TaiXe [Tài xế]
+        C1[Nhận thông báo chuyến mới] --> C2{Phản hồi?}
+        C2 -- Đồng ý nhận --> C3[Di chuyển đến điểm đón]
+        C2 -- Từ chối --> C4([Kết thúc luồng tài xế])
+    end
 
-    A2 --> S1
-    S1 --> A3
+    A3 --> B1
+    B5 --> A6
+    B6 --> C1
+    C2 -- Đồng ý --> B7
+    C2 -- Từ chối --> B7
+    B8 --> A5
+```
 
-    A4 --> S2
-    S3 --> A5
+# Thực hiện & Theo dõi chuyến đi (Dựa trên UC05, UC06)
+```mermaid
+flowchart TD
+    subgraph TaiXe [Tài xế]
+        D1([Tài xế nhận chuyến]) --> D2[Cập nhật trạng thái: Đã đến điểm đón]
+        D2 --> D3[Cập nhật trạng thái: Đã đón khách & Bắt đầu di chuyển]
+        D3 --> D4[Di chuyển đến điểm đến]
+        D4 --> D5[Cập nhật trạng thái: Hoàn thành chuyến đi]
+    end
 
-    A6 --> S5
-    D2 --> A7
+    subgraph CabSystem [CAB System]
+        E1[Ghi nhận trạng thái: Đang đến điểm đón] --> E2[Truyền vị trí thời gian thực cho Khách hàng]
+        E2 --> E3[Ghi nhận trạng thái: Đang thực hiện chuyến]
+        E3 --> E4[Cập nhật liên tục tọa độ lên bản đồ]
+        E4 --> E5[Ghi nhận trạng thái: Hoàn thành chuyến]
+        E5 --> E6[Chuyển dữ liệu sang quy trình Tính cước]
+    end
 
-    A8 --> S7
-    D3 --> A9
+    subgraph KhachHang [Khách hàng]
+        F1[Mở giao diện theo dõi chuyến đi] --> F2[Xem thông tin tài xế, biển số xe & vị trí trên bản đồ]
+        F2 --> F3[Theo dõi hành trình di chuyển trực tiếp]
+        F3 --> F4[Nhận thông báo chuyến đi hoàn thành]
+    end
 
-    S9 --> A10
+    D1 --> E1
+    E2 --> F1
+    D2 --> E2
+    D3 --> E3
+    E4 --> F3
+    D5 --> E5
+    E5 --> F4
+    E6 --> G([Chuyển tiếp sang Thanh toán])
+```
 
-    %% LUỒNG THAY THẾ
+# Quy trình Tính cước, Thanh toán & Giao dịch (Dựa trên UC07, UC08, UC09)
+```mermaid
+flowchart TD
+    subgraph CabSystem [CAB System]
+        H1([Chuyến đi hoàn thành]) --> H2[Lấy thông tin quãng đường, thời gian & loại dịch vụ]
+        H2 --> H3[Áp dụng quy tắc tính cước để ra số tiền phải trả]
+        H3 --> H4[Lưu hóa đơn & Hiển thị số tiền cho Khách hàng]
+    end
 
-    D1 -->|Không| E1["Thông báo lỗi<br/>Nhập lại thông tin"]
-    E1 --> A3
+    subgraph KhachHang [Khách hàng]
+        I1[Xem tổng số tiền cần thanh toán] --> I2{Chọn phương thức thanh toán?}
+        I2 -- Tiền mặt --> I3[Thanh toán tiền mặt trực tiếp cho tài xế]
+        I2 -- Điện tử --> I4[Chọn ví điện tử / Thẻ ngân hàng liên kết] --> I5[Xác nhận thanh toán qua cổng ngoài]
+    end
 
-    D2 -->|Không| E2["Thông báo đăng nhập thất bại"]
-    E2 --> A6
+    subgraph PaymentGateway [Nhà cung cấp thanh toán bên ngoài]
+        J1[Tiếp nhận yêu cầu thanh toán điện tử] --> J2{Cổng thanh toán xử lý?}
+        J2 -- Thành công --> J3[Trả kết quả: Giao dịch thành công]
+        J2 -- Thất bại --> J4[Trả kết quả: Giao dịch thất bại / Lỗi]
+    end
 
-    D3 -->|Không| E3["Thông báo lỗi<br/>Kiểm tra lại thông tin"]
-    E3 --> A8
-
-    %% LUỒNG NGOẠI LỆ
-
-    S3 -.-> E4["Lỗi lưu dữ liệu"]
-    S8 -.-> E4
-
-    %% STYLE
-
-    style ACTOR fill:#ffffff,stroke:#222222,stroke-width:2px
-    style SYSTEM fill:#ffffff,stroke:#222222,stroke-width:2px
-
-    style A1 fill:#222222,color:#ffffff,stroke:#222222
-    style A10 fill:#222222,color:#ffffff,stroke:#222222
-
-    style D1 fill:#fff2cc,stroke:#222222,stroke-width:2px
-    style D2 fill:#fff2cc,stroke:#222222,stroke-width:2px
-    style D3 fill:#fff2cc,stroke:#222222,stroke-width:2px
-
-    style E1 fill:#f8d7da,stroke:#222222
-    style E2 fill:#f8d7da,stroke:#222222
-    style E3 fill:#f8d7da,stroke:#222222
-    style E4 fill:#f8d7da,stroke:#222222
+    H4 --> I1
+    I3 --> K1([Tài xế xác nhận đã nhận tiền mặt])
+    I5 --> J1
+    J1 --> J2
+    J3 --> L1[Hệ thống cập nhật giao dịch thành công & Lưu doanh thu] --> M1([Chuyển sang Đánh giá tài xế])
+    J4 --> L2[Hệ thống báo lỗi & Yêu cầu khách chọn lại phương thức] --> I2
 ```
 
 # Giai đoạn 10: Phân tích Businsess Rules (quy tắc nghiệp vụ)
+
+| ID Quy tắc | Tên Business Rule | Đối tượng áp dụng | Phân tích quy tắc nghiệp vụ |
+| --- | --- | --- | --- |
+| **BR-RULE-01** | Quy tắc xác thực và phân quyền tài khoản | Khách hàng, Tài xế, Nhân viên vận hành | Mọi người dùng phải có tài khoản hợp lệ và đăng nhập trước khi sử dụng hệ thống. Hệ thống phân quyền theo vai trò: Khách hàng chỉ được đặt xe và thanh toán; Tài xế chỉ được nhận chuyến và cập nhật trạng thái; Nhân viên vận hành được truy cập các chức năng quản trị. |
+| **BR-RULE-02** | Quy tắc đăng ký tài khoản | Khách hàng, Tài xế | Email hoặc số điện thoại phải là duy nhất. Mật khẩu phải đáp ứng yêu cầu bảo mật. Tài khoản tài xế chỉ được kích hoạt sau khi hồ sơ và phương tiện được xác minh. |
+| **BR-RULE-03** | Quy tắc cập nhật thông tin cá nhân | Khách hàng, Tài xế | Người dùng chỉ được cập nhật thông tin của chính mình. Các trường bắt buộc không được để trống và mọi thay đổi phải được lưu vào lịch sử hệ thống. |
+| **BR-RULE-04** | Quy tắc điều kiện tạo yêu cầu đặt xe | Khách hàng, CAB System | Khách hàng phải nhập đầy đủ điểm đón, điểm đến và chọn loại xe hợp lệ. Không được tạo yêu cầu mới khi đang có chuyến chưa hoàn thành hoặc chưa thanh toán. |
+| **BR-RULE-05** | Quy tắc tự động tìm và phân công tài xế | CAB System, Tài xế | Hệ thống chỉ quét tài xế ở trạng thái Ready. Việc phân công ưu tiên tài xế gần điểm đón nhất và đúng loại xe khách hàng yêu cầu. |
+| **BR-RULE-06** | Quy tắc xử lý tài xế từ chối hoặc không phản hồi | CAB System, Tài xế | Tài xế phải phản hồi trong thời gian quy định (Timeout). Nếu từ chối hoặc hết thời gian phản hồi, hệ thống tự động tìm và gửi yêu cầu đến tài xế phù hợp tiếp theo. |
+| **BR-RULE-07** | Quy tắc tuần tự trạng thái chuyến đi | Tài xế, CAB System | Trạng thái chuyến đi phải theo đúng trình tự: Đang tìm tài xế → Đã nhận chuyến → Đã đến điểm đón → Đang di chuyển → Hoàn thành chuyến → Đã thanh toán. Không được bỏ qua hoặc quay ngược trạng thái. |
+| **BR-RULE-08** | Quy tắc hủy chuyến | Khách hàng, Tài xế, CAB System | Khách hàng chỉ được hủy trước khi tài xế đón khách. Tài xế chỉ được hủy trong các trường hợp hợp lệ. Hệ thống phải ghi nhận lý do và lịch sử hủy chuyến. |
+| **BR-RULE-09** | Quy tắc tính cước chuyến đi | CAB System | Cước phí được tính tự động sau khi chuyến đi hoàn thành. Giá cước dựa trên loại xe, quãng đường, thời gian di chuyển và các phụ phí phát sinh theo quy định. |
+| **BR-RULE-10** | Quy tắc lựa chọn và xử lý thanh toán | Khách hàng, CAB System, Nhà cung cấp thanh toán | Khách hàng có thể thanh toán bằng tiền mặt hoặc thanh toán điện tử. Nếu giao dịch điện tử thất bại, hệ thống phải ghi nhận lỗi, thông báo và cho phép thanh toán lại hoặc đổi phương thức. |
+| **BR-RULE-11** | Quy tắc quản lý giao dịch | CAB System, Bộ phận Tài chính | Mỗi chuyến chỉ có một giao dịch thanh toán chính. Giao dịch phải có mã định danh duy nhất và không được chỉnh sửa sau khi hoàn tất. |
+| **BR-RULE-12** | Quy tắc gửi thông báo | CAB System, Khách hàng, Tài xế | Hệ thống gửi thông báo khi có tài xế nhận chuyến, tài xế đến điểm đón, thay đổi trạng thái chuyến, hoàn thành chuyến và kết quả thanh toán. |
+| **BR-RULE-13** | Quy tắc đánh giá tài xế | Khách hàng, CAB System | Đánh giá chỉ được thực hiện sau khi chuyến đi hoàn thành và thanh toán thành công. Mỗi chuyến chỉ được đánh giá một lần với thang điểm từ 1 đến 5 sao. |
+| **BR-RULE-14** | Quy tắc quản lý tài chính | Bộ phận Tài chính, CAB System | Doanh thu được tổng hợp từ các giao dịch thành công. Chỉ nhân viên tài chính được phép xem, thống kê và đối soát dữ liệu tài chính. |
+| **BR-RULE-15** | Quy tắc báo cáo hoạt động | Ban giám đốc, CAB System | Báo cáo hoạt động chỉ hiển thị dữ liệu đã tổng hợp, bao gồm số chuyến đi, doanh thu, số tài xế hoạt động, số khách hàng và tỷ lệ hủy chuyến theo ngày, tháng hoặc năm. |
 
