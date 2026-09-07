@@ -1,0 +1,79 @@
+openapi: 3.0.3
+info:
+  title: CAB - BR-02 Quản lý khách hàng
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+paths:
+  /customers:
+    get:
+      tags: [BR-02 – Quản lý khách hàng]
+      summary: FR-02.01 - Xem danh sách khách hàng
+      responses:
+        '200':
+          description: Danh sách khách hàng
+  /customers/{customerId}:
+    get:
+      tags: [BR-02 – Quản lý khách hàng]
+      summary: FR-02.02 - Xem thông tin khách hàng
+      parameters:
+        - name: customerId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Thông tin chi tiết khách hàng
+    put:
+      tags: [BR-02 – Quản lý khách hàng]
+      summary: FR-02.03 - Cập nhật thông tin khách hàng
+      parameters:
+        - name: customerId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fullName: { type: string }
+                email: { type: string }
+      responses:
+        '200':
+          description: Cập nhật thành công
+  /customers/{customerId}/status:
+    patch:
+      tags: [BR-02 – Quản lý khách hàng]
+      summary: FR-02.04 - Quản lý trạng thái tài khoản
+      parameters:
+        - name: customerId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [status]
+              properties:
+                status: { type: string, enum: [ACTIVE, LOCKED, SUSPENDED] }
+      responses:
+        '200':
+          description: Cập nhật trạng thái thành công
+  /customers/{customerId}/trips:
+    get:
+      tags: [BR-02 – Quản lý khách hàng]
+      summary: FR-02.05 - Xem lịch sử chuyến đi
+      parameters:
+        - name: customerId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Danh sách các chuyến xe đã thực hiện
