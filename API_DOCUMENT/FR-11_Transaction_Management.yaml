@@ -1,0 +1,84 @@
+openapi: 3.0.3
+info:
+  title: CAB - BR-11 Quản lý giao dịch
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+paths:
+  /transactions/create:
+    post:
+      tags: [BR-11 – Quản lý giao dịch]
+      summary: FR-11.01 - Tạo giao dịch
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [tripId, amount]
+              properties:
+                tripId: { type: string }
+                amount: { type: number }
+      responses:
+        '201':
+          description: Đã tạo bản ghi giao dịch mới
+  /transactions/{transactionId}/save-code:
+    put:
+      tags: [BR-11 – Quản lý giao dịch]
+      summary: FR-11.02 - Lưu mã giao dịch
+      parameters:
+        - name: transactionId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [reconciliationCode]
+              properties:
+                reconciliationCode: { type: string }
+      responses:
+        '200':
+          description: Mã đối soát đã được cập nhật
+  /transactions/{transactionId}/status:
+    patch:
+      tags: [BR-11 – Quản lý giao dịch]
+      summary: FR-11.03 - Cập nhật trạng thái giao dịch
+      parameters:
+        - name: transactionId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [status]
+              properties:
+                status: { type: string, enum: [PENDING, SUCCESS, FAILED] }
+      responses:
+        '200':
+          description: Cập nhật trạng thái giao dịch thành công
+  /transactions/lookup:
+    get:
+      tags: [BR-11 – Quản lý giao dịch]
+      summary: FR-11.04 - Tra cứu giao dịch
+      parameters:
+        - name: transactionId
+          in: query
+          schema: { type: string }
+      responses:
+        '200':
+          description: Thông tin chi tiết giao dịch
+  /transactions/failed-records:
+    get:
+      tags: [BR-11 – Quản lý giao dịch]
+      summary: FR-11.05 - Ghi nhận giao dịch thất bại
+      responses:
+        '200':
+          description: Danh sách các giao dịch thanh toán không thành công
