@@ -1,0 +1,91 @@
+openapi: 3.0.3
+info:
+  title: CAB - BR-08 Quản lý trạng thái chuyến
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+paths:
+  /trips/{tripId}/status/searching:
+    post:
+      tags: [BR-08 – Quản lý trạng thái chuyến]
+      summary: FR-08.01 - Cập nhật trạng thái tìm tài xế
+      parameters:
+        - name: tripId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Trạng thái Đang tìm tài xế
+  /trips/{tripId}/status/accepted:
+    post:
+      tags: [BR-08 – Quản lý trạng thái chuyến]
+      summary: FR-08.02 - Cập nhật trạng thái đã nhận chuyến
+      parameters:
+        - name: tripId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Trạng thái Tài xế đã nhận chuyến
+  /trips/{tripId}/status/arrived-at-pickup:
+    post:
+      tags: [BR-08 – Quản lý trạng thái chuyến]
+      summary: FR-08.03 - Cập nhật trạng thái đã đến
+      parameters:
+        - name: tripId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Trạng thái Tài xế đã đến điểm đón
+  /trips/{tripId}/status/picked-up:
+    post:
+      tags: [BR-08 – Quản lý trạng thái chuyến]
+      summary: FR-08.04 - Cập nhật trạng thái đã đón khách
+      parameters:
+        - name: tripId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Trạng thái Đã đón khách lên xe
+  /trips/{tripId}/status/in-transit:
+    post:
+      tags: [BR-08 – Quản lý trạng thái chuyến]
+      summary: FR-08.05 - Cập nhật trạng thái đang di chuyển
+      parameters:
+        - name: tripId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Trạng thái Đang chở khách di chuyển
+  /trips/{tripId}/status/completed:
+    post:
+      tags: [BR-08 – Quản lý trạng thái chuyến]
+      summary: FR-08.06 - Hoàn thành chuyến
+      parameters:
+        - name: tripId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Trạng thái Chuyến đi hoàn thành
+  /trips/{tripId}/status-history:
+    get:
+      tags: [BR-08 – Quản lý trạng thái chuyến]
+      summary: FR-08.07 - Lưu lịch sử trạng thái
+      parameters:
+        - name: tripId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Toàn bộ lịch sử các bước thay đổi trạng thái
