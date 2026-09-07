@@ -1,0 +1,111 @@
+openapi: 3.0.3
+info:
+  title: CAB - BR-01 Quản lý tài khoản
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+paths:
+  /auth/customers/register:
+    post:
+      tags: [BR-01 – Quản lý tài khoản]
+      summary: FR-01.01 - Đăng ký tài khoản khách hàng
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [fullName, phoneNumber, password]
+              properties:
+                fullName: { type: string, example: "Nguyễn Văn A" }
+                phoneNumber: { type: string, example: "0901234567" }
+                password: { type: string, example: "Password@123" }
+      responses:
+        '201':
+          description: Đăng ký thành công
+  /auth/login:
+    post:
+      tags: [BR-01 – Quản lý tài khoản]
+      summary: FR-01.02 - Đăng nhập
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [username, password]
+              properties:
+                username: { type: string, example: "0901234567" }
+                password: { type: string, example: "Password@123" }
+      responses:
+        '200':
+          description: Đăng nhập thành công
+  /auth/logout:
+    post:
+      tags: [BR-01 – Quản lý tài khoản]
+      summary: FR-01.03 - Đăng xuất
+      responses:
+        '200':
+          description: Đăng xuất thành công
+  /users/profile:
+    put:
+      tags: [BR-01 – Quản lý tài khoản]
+      summary: FR-01.04 - Cập nhật thông tin cá nhân
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fullName: { type: string, example: "Nguyễn Văn A" }
+                email: { type: string, example: "a.nguyen@example.com" }
+      responses:
+        '200':
+          description: Cập nhật thành công
+  /operators/drivers/accounts:
+    post:
+      tags: [BR-01 – Quản lý tài khoản]
+      summary: FR-01.05 - Quản lý tài khoản tài xế
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [driverName, phoneNumber, licenseNumber]
+              properties:
+                driverName: { type: string, example: "Trần Văn B" }
+                phoneNumber: { type: string, example: "0988776655" }
+                licenseNumber: { type: string, example: "B2-998877" }
+      responses:
+        '201':
+          description: Tạo/cập nhật tài khoản tài xế thành công
+  /auth/verify-token:
+    post:
+      tags: [BR-01 – Quản lý tài khoản]
+      summary: FR-01.06 - Xác thực người dùng
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [token]
+              properties:
+                token: { type: string, example: "jwt_token_sample" }
+      responses:
+        '200':
+          description: Xác thực hợp lệ
+  /auth/permissions:
+    get:
+      tags: [BR-01 – Quản lý tài khoản]
+      summary: FR-01.07 - Phân quyền người dùng
+      parameters:
+        - name: role
+          in: query
+          required: true
+          schema: { type: string, enum: [CUSTOMER, DRIVER, OPERATOR, ACCOUNTANT] }
+      responses:
+        '200':
+          description: Danh sách quyền theo vai trò
