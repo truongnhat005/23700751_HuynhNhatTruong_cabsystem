@@ -1,0 +1,30 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Nhận thông báo chuyến mới (FR-06.01)
+  description: Đặc tả API cho yêu cầu chức năng FR-06.01 - Nhận thông báo chuyến mới
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /driver/notifications/incoming-trip:
+    get:
+      tags:
+        - Xử lý nhận chuyến
+      summary: FR-06.01 - Nhận thông báo chuyến mới
+
+      parameters:
+        - name: driverId
+          in: query
+          required: true
+          schema: { type: string, example: "DRV_001" }
+      responses:
+        '200':
+          description: Nhận thông báo khi có yêu cầu chuyến mới
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tripId: { type: string, example: "TRIP_001" }
+    

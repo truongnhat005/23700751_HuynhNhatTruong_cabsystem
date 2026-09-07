@@ -1,0 +1,40 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Cập nhật vị trí tài xế (FR-03.04)
+  description: Đặc tả API cho yêu cầu chức năng FR-03.04 - Cập nhật vị trí tài xế
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /drivers/{driverId}/location:
+    put:
+      tags:
+        - Quản lý tài xế
+      summary: FR-03.04 - Cập nhật vị trí tài xế
+
+      parameters:
+        - name: driverId
+          in: path
+          required: true
+          schema: { type: string, example: "DRV_001" }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [latitude, longitude]
+              properties:
+                latitude: { type: number, example: 10.776889 }
+                longitude: { type: number, example: 106.700806 }
+      responses:
+        '200':
+          description: Đã ghi nhận vị trí GPS
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string, example: "Vị trí đã được cập nhật" }
+    

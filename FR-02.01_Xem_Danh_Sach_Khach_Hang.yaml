@@ -1,0 +1,33 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Xem danh sách khách hàng (FR-02.01)
+  description: Đặc tả API cho yêu cầu chức năng FR-02.01 - Xem danh sách khách hàng
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /customers:
+    get:
+      tags:
+        - Quản lý khách hàng
+      summary: FR-02.01 - Xem danh sách khách hàng
+
+      parameters:
+        - name: page
+          in: query
+          schema: { type: integer, example: 1 }
+        - name: limit
+          in: query
+          schema: { type: integer, example: 20 }
+      responses:
+        '200':
+          description: Danh sách khách hàng
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total: { type: integer, example: 100 }
+                  items: { type: array, items: { type: object } }
+    

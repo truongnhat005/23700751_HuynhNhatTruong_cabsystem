@@ -1,0 +1,30 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Xử lý thanh toán thất bại (FR-10.05)
+  description: Đặc tả API cho yêu cầu chức năng FR-10.05 - Xử lý thanh toán thất bại
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /payments/{tripId}/failure-handler:
+    post:
+      tags:
+        - Thanh toán
+      summary: FR-10.05 - Xử lý thanh toán thất bại
+
+      parameters:
+        - name: tripId
+          in: path
+          required: true
+          schema: { type: string, example: "TRIP_001" }
+      responses:
+        '200':
+          description: Thông báo khi thanh toán thất bại và hỗ trợ xử lý lại theo chính sách
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string, example: "Thanh toán thất bại, vui lòng thử lại" }
+    

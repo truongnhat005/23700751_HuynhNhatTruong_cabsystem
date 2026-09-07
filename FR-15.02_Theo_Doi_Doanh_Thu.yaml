@@ -1,0 +1,34 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Theo dõi doanh thu (FR-15.02)
+  description: Đặc tả API cho yêu cầu chức năng FR-15.02 - Theo dõi doanh thu
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /finance/revenue:
+    get:
+      tags:
+        - Quản lý tài chính
+      summary: FR-15.02 - Theo dõi doanh thu
+
+      parameters:
+        - name: fromDate
+          in: query
+          required: true
+          schema: { type: string, example: "2026-09-01" }
+        - name: toDate
+          in: query
+          required: true
+          schema: { type: string, example: "2026-09-07" }
+      responses:
+        '200':
+          description: Cung cấp dữ liệu doanh thu từ các chuyến đi và giao dịch thanh toán
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  totalRevenue: { type: number, example: 150000000 }
+    

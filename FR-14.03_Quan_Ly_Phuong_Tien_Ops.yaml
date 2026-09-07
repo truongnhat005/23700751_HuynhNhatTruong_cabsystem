@@ -1,0 +1,24 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Quản lý phương tiện (FR-14.03)
+  description: Đặc tả API cho yêu cầu chức năng FR-14.03 - Quản lý phương tiện
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /operations/vehicles:
+    get:
+      tags:
+        - Quản lý vận hành
+      summary: FR-14.03 - Quản lý phương tiện
+
+      responses:
+        '200':
+          description: Cho phép nhân viên vận hành quản lý thông tin phương tiện
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { type: object }
+    

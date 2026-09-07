@@ -1,0 +1,25 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Báo cáo tỷ lệ hủy (FR-16.04)
+  description: Đặc tả API cho yêu cầu chức năng FR-16.04 - Báo cáo tỷ lệ hủy
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /reports/cancellation-rate:
+    get:
+      tags:
+        - Báo cáo hoạt động
+      summary: FR-16.04 - Báo cáo tỷ lệ hủy
+
+      responses:
+        '200':
+          description: Cung cấp tỷ lệ chuyến bị hủy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cancellationRatePercent: { type: number, example: 7.5 }
+    

@@ -1,0 +1,30 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Thanh toán trực tuyến (FR-10.03)
+  description: Đặc tả API cho yêu cầu chức năng FR-10.03 - Thanh toán trực tuyến
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /payments/{tripId}/online:
+    post:
+      tags:
+        - Thanh toán
+      summary: FR-10.03 - Thanh toán trực tuyến
+
+      parameters:
+        - name: tripId
+          in: path
+          required: true
+          schema: { type: string, example: "TRIP_001" }
+      responses:
+        '200':
+          description: Cho phép khách hàng thực hiện thanh toán điện tử thông qua nhà cung cấp bên ngoài
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  paymentUrl: { type: string, example: "https://gateway.vn/pay" }
+    

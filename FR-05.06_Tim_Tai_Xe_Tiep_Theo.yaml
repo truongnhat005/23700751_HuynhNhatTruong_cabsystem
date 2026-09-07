@@ -1,0 +1,35 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Tìm tài xế tiếp theo (FR-05.06)
+  description: Đặc tả API cho yêu cầu chức năng FR-05.06 - Tìm tài xế tiếp theo
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /dispatch/retry-next-driver:
+    post:
+      tags:
+        - Tự động tìm tài xế
+      summary: FR-05.06 - Tìm tài xế tiếp theo
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [tripId, previousDriverId]
+              properties:
+                tripId: { type: string, example: "TRIP_001" }
+                previousDriverId: { type: string, example: "DRV_001" }
+      responses:
+        '200':
+          description: Tiếp tục tìm và gửi chuyến cho tài xế kế tiếp
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string, example: "Đang điều phối tài xế tiếp theo" }
+    

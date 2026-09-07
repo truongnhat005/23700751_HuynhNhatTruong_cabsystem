@@ -1,0 +1,35 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Thông báo chuyến mới cho tài xế (FR-12.06)
+  description: Đặc tả API cho yêu cầu chức năng FR-12.06 - Thông báo chuyến mới cho tài xế
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /notifications/driver-new-trip:
+    post:
+      tags:
+        - Thông báo
+      summary: FR-12.06 - Thông báo chuyến mới cho tài xế
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [driverId, tripId]
+              properties:
+                driverId: { type: string, example: "DRV_001" }
+                tripId: { type: string, example: "TRIP_001" }
+      responses:
+        '200':
+          description: Thông báo cho tài xế khi có chuyến mới phù hợp
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string, example: "Đã phát thông báo chuyến mới tới tài xế" }
+    

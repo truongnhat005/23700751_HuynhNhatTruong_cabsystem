@@ -1,0 +1,38 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Tạo yêu cầu đặt xe (FR-04.04)
+  description: Đặc tả API cho yêu cầu chức năng FR-04.04 - Tạo yêu cầu đặt xe
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /bookings/confirm:
+    post:
+      tags:
+        - Đặt xe
+      summary: FR-04.04 - Tạo yêu cầu đặt xe
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [customerId, pickupAddress, dropoffAddress, vehicleType]
+              properties:
+                customerId: { type: string, example: "CUST_001" }
+                pickupAddress: { type: string, example: "123 Lê Lợi, Q1" }
+                dropoffAddress: { type: string, example: "Sân bay TSN" }
+                vehicleType: { type: string, example: "4_SEATS" }
+      responses:
+        '201':
+          description: Tạo yêu cầu đặt xe thành công
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tripId: { type: string, example: "TRIP_001" }
+                  status: { type: string, example: "SEARCHING_DRIVER" }
+    

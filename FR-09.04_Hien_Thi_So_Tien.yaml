@@ -1,0 +1,30 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Hiển thị số tiền (FR-09.04)
+  description: Đặc tả API cho yêu cầu chức năng FR-09.04 - Hiển thị số tiền
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /fares/{tripId}/display:
+    get:
+      tags:
+        - Tính cước
+      summary: FR-09.04 - Hiển thị số tiền
+
+      parameters:
+        - name: tripId
+          in: path
+          required: true
+          schema: { type: string, example: "TRIP_001" }
+      responses:
+        '200':
+          description: Hiển thị số tiền cần thanh toán cho khách hàng
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  fareDisplay: { type: string, example: "65,000 VND" }
+    

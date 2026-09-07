@@ -1,0 +1,30 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Đánh giá tài xế (FR-13.01)
+  description: Đặc tả API cho yêu cầu chức năng FR-13.01 - Đánh giá tài xế
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /reviews/{tripId}/init:
+    post:
+      tags:
+        - Đánh giá tài xế
+      summary: FR-13.01 - Đánh giá tài xế
+
+      parameters:
+        - name: tripId
+          in: path
+          required: true
+          schema: { type: string, example: "TRIP_001" }
+      responses:
+        '201':
+          description: Cho phép khách hàng đánh giá tài xế sau khi chuyến đi hoàn thành
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string, example: "Mở phiên gửi đánh giá thành công" }
+    

@@ -1,0 +1,29 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Lưu lịch sử trạng thái (FR-08.07)
+  description: Đặc tả API cho yêu cầu chức năng FR-08.07 - Lưu lịch sử trạng thái
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /trips/{tripId}/status-history:
+    get:
+      tags:
+        - Quản lý trạng thái chuyến
+      summary: FR-08.07 - Lưu lịch sử trạng thái
+
+      parameters:
+        - name: tripId
+          in: path
+          required: true
+          schema: { type: string, example: "TRIP_001" }
+      responses:
+        '200':
+          description: Lưu lại và tra cứu lịch sử thay đổi trạng thái của chuyến đi
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { type: object }
+    

@@ -1,0 +1,32 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Xem thông tin khách hàng (FR-02.02)
+  description: Đặc tả API cho yêu cầu chức năng FR-02.02 - Xem thông tin khách hàng
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /customers/{customerId}:
+    get:
+      tags:
+        - Quản lý khách hàng
+      summary: FR-02.02 - Xem thông tin khách hàng
+
+      parameters:
+        - name: customerId
+          in: path
+          required: true
+          schema: { type: string, example: "CUST_001" }
+      responses:
+        '200':
+          description: Chi tiết thông tin khách hàng
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  customerId: { type: string, example: "CUST_001" }
+                  fullName: { type: string, example: "Nguyễn Văn A" }
+                  phoneNumber: { type: string, example: "0901234567" }
+    

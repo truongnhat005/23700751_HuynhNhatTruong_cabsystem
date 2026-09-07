@@ -1,0 +1,35 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Thu thập thông tin chuyến (FR-09.02)
+  description: Đặc tả API cho yêu cầu chức năng FR-09.02 - Thu thập thông tin chuyến
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /fares/collect-info:
+    post:
+      tags:
+        - Tính cước
+      summary: FR-09.02 - Thu thập thông tin chuyến
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [distanceKm, durationMin]
+              properties:
+                distanceKm: { type: number, example: 5.4 }
+                durationMin: { type: integer, example: 15 }
+      responses:
+        '200':
+          description: Sử dụng thông tin chuyến đi cần thiết để tính cước
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string, example: "Đã thu thập thông số lộ trình" }
+    

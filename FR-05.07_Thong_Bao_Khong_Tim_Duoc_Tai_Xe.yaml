@@ -1,0 +1,34 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Thông báo không tìm được tài xế (FR-05.07)
+  description: Đặc tả API cho yêu cầu chức năng FR-05.07 - Thông báo không tìm được tài xế
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /dispatch/driver-not-found:
+    post:
+      tags:
+        - Tự động tìm tài xế
+      summary: FR-05.07 - Thông báo không tìm được tài xế
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [tripId]
+              properties:
+                tripId: { type: string, example: "TRIP_001" }
+      responses:
+        '200':
+          description: Thông báo cho khách hàng khi không tìm được tài xế
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string, example: "Không tìm thấy tài xế khả dụng xung quanh" }
+    

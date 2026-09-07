@@ -1,0 +1,30 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Chấp nhận chuyến (FR-06.03)
+  description: Đặc tả API cho yêu cầu chức năng FR-06.03 - Chấp nhận chuyến
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /driver/trips/{tripId}/accept:
+    post:
+      tags:
+        - Xử lý nhận chuyến
+      summary: FR-06.03 - Chấp nhận chuyến
+
+      parameters:
+        - name: tripId
+          in: path
+          required: true
+          schema: { type: string, example: "TRIP_001" }
+      responses:
+        '200':
+          description: Tài xế chấp nhận yêu cầu chuyến
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string, example: "Chấp nhận chuyến thành công" }
+    

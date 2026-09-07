@@ -1,0 +1,30 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Xem thời gian dự kiến (FR-07.04)
+  description: Đặc tả API cho yêu cầu chức năng FR-07.04 - Xem thời gian dự kiến
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /tracking/{tripId}/eta:
+    get:
+      tags:
+        - Theo dõi chuyến đi
+      summary: FR-07.04 - Xem thời gian dự kiến
+
+      parameters:
+        - name: tripId
+          in: path
+          required: true
+          schema: { type: string, example: "TRIP_001" }
+      responses:
+        '200':
+          description: Cung cấp thời gian dự kiến tài xế đến điểm đón
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  etaMinutes: { type: integer, example: 6 }
+    

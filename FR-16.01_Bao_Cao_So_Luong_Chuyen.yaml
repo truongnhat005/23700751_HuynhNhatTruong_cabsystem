@@ -1,0 +1,34 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Báo cáo số lượng chuyến (FR-16.01)
+  description: Đặc tả API cho yêu cầu chức năng FR-16.01 - Báo cáo số lượng chuyến
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /reports/trips/count:
+    get:
+      tags:
+        - Báo cáo hoạt động
+      summary: FR-16.01 - Báo cáo số lượng chuyến
+
+      parameters:
+        - name: fromDate
+          in: query
+          required: true
+          schema: { type: string, example: "2026-09-01" }
+        - name: toDate
+          in: query
+          required: true
+          schema: { type: string, example: "2026-09-07" }
+      responses:
+        '200':
+          description: Cung cấp báo cáo về số lượng chuyến theo khoảng thời gian
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  totalTrips: { type: integer, example: 1200 }
+    

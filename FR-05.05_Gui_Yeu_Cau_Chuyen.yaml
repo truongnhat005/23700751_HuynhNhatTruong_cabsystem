@@ -1,0 +1,35 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Gửi yêu cầu chuyến (FR-05.05)
+  description: Đặc tả API cho yêu cầu chức năng FR-05.05 - Gửi yêu cầu chuyến
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /dispatch/send-request:
+    post:
+      tags:
+        - Tự động tìm tài xế
+      summary: FR-05.05 - Gửi yêu cầu chuyến
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [tripId, driverId]
+              properties:
+                tripId: { type: string, example: "TRIP_001" }
+                driverId: { type: string, example: "DRV_001" }
+      responses:
+        '200':
+          description: Đã phát lệnh chuyến đến tài xế
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string, example: "Yêu cầu đã được gửi đến tài xế" }
+    
