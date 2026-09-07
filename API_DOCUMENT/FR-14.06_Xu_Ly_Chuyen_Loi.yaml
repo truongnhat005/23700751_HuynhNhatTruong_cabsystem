@@ -1,0 +1,39 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Xử lý chuyến lỗi (FR-14.06)
+  description: Đặc tả API cho yêu cầu chức năng FR-14.06 - Xử lý chuyến lỗi
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /operations/trips/{tripId}/resolve:
+    post:
+      tags:
+        - Quản lý vận hành
+      summary: FR-14.06 - Xử lý chuyến lỗi
+
+      parameters:
+        - name: tripId
+          in: path
+          required: true
+          schema: { type: string, example: "TRIP_001" }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [solution]
+              properties:
+                solution: { type: string, example: "Điều xe mới thay thế" }
+      responses:
+        '200':
+          description: Hỗ trợ nhân viên vận hành xử lý các trường hợp chuyến đi phát sinh lỗi
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string, example: "Xử lý sự cố chuyến xe thành công" }
+    

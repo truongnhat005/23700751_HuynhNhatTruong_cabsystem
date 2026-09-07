@@ -1,0 +1,39 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Chấm điểm tài xế (FR-13.02)
+  description: Đặc tả API cho yêu cầu chức năng FR-13.02 - Chấm điểm tài xế
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /reviews/{tripId}/score:
+    post:
+      tags:
+        - Đánh giá tài xế
+      summary: FR-13.02 - Chấm điểm tài xế
+
+      parameters:
+        - name: tripId
+          in: path
+          required: true
+          schema: { type: string, example: "TRIP_001" }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [score]
+              properties:
+                score: { type: integer, minimum: 1, maximum: 5, example: 5 }
+      responses:
+        '200':
+          description: Cho phép khách hàng chấm điểm tài xế theo thang điểm được quy định
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  score: { type: integer, example: 5 }
+    

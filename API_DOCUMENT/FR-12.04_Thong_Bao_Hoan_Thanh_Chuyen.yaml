@@ -1,0 +1,35 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Thông báo hoàn thành chuyến (FR-12.04)
+  description: Đặc tả API cho yêu cầu chức năng FR-12.04 - Thông báo hoàn thành chuyến
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /notifications/trip-completed:
+    post:
+      tags:
+        - Thông báo
+      summary: FR-12.04 - Thông báo hoàn thành chuyến
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [customerId, tripId]
+              properties:
+                customerId: { type: string, example: "CUST_001" }
+                tripId: { type: string, example: "TRIP_001" }
+      responses:
+        '200':
+          description: Thông báo khi chuyến đi hoàn thành
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string, example: "Đã gửi thông báo hoàn thành chuyến" }
+    

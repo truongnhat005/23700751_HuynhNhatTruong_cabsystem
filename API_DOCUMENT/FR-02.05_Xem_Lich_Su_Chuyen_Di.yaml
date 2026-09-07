@@ -1,0 +1,29 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Xem lịch sử chuyến đi (FR-02.05)
+  description: Đặc tả API cho yêu cầu chức năng FR-02.05 - Xem lịch sử chuyến đi
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /customers/{customerId}/trips:
+    get:
+      tags:
+        - Quản lý khách hàng
+      summary: FR-02.05 - Xem lịch sử chuyến đi
+
+      parameters:
+        - name: customerId
+          in: path
+          required: true
+          schema: { type: string, example: "CUST_001" }
+      responses:
+        '200':
+          description: Danh sách các chuyến đi của khách hàng
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { type: object }
+    

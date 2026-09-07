@@ -1,0 +1,24 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Quản lý tài xế (FR-14.02)
+  description: Đặc tả API cho yêu cầu chức năng FR-14.02 - Quản lý tài xế
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /operations/drivers:
+    get:
+      tags:
+        - Quản lý vận hành
+      summary: FR-14.02 - Quản lý tài xế
+
+      responses:
+        '200':
+          description: Cho phép nhân viên vận hành quản lý thông tin và trạng thái tài xế
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { type: object }
+    

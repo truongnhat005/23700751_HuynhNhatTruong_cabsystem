@@ -1,0 +1,30 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Lưu đánh giá (FR-13.04)
+  description: Đặc tả API cho yêu cầu chức năng FR-13.04 - Lưu đánh giá
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /reviews/{tripId}/save:
+    post:
+      tags:
+        - Đánh giá tài xế
+      summary: FR-13.04 - Lưu đánh giá
+
+      parameters:
+        - name: tripId
+          in: path
+          required: true
+          schema: { type: string, example: "TRIP_001" }
+      responses:
+        '200':
+          description: Lưu kết quả đánh giá gắn với chuyến đi và tài xế
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string, example: "Đánh giá đã được lưu vào hệ thống" }
+    

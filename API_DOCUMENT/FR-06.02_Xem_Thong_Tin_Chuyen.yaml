@@ -1,0 +1,32 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Xem thông tin chuyến (FR-06.02)
+  description: Đặc tả API cho yêu cầu chức năng FR-06.02 - Xem thông tin chuyến
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /driver/trips/{tripId}/details:
+    get:
+      tags:
+        - Xử lý nhận chuyến
+      summary: FR-06.02 - Xem thông tin chuyến
+
+      parameters:
+        - name: tripId
+          in: path
+          required: true
+          schema: { type: string, example: "TRIP_001" }
+      responses:
+        '200':
+          description: Thông tin cần thiết của chuyến trước khi nhận
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pickupAddress: { type: string, example: "123 Lê Lợi, Q1" }
+                  dropoffAddress: { type: string, example: "Sân bay TSN" }
+                  estimatedFare: { type: number, example: 65000 }
+    

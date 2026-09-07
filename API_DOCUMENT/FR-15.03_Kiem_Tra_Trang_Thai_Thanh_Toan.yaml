@@ -1,0 +1,30 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Kiểm tra trạng thái thanh toán (FR-15.03)
+  description: Đặc tả API cho yêu cầu chức năng FR-15.03 - Kiểm tra trạng thái thanh toán
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /finance/payments/{transactionId}/status:
+    get:
+      tags:
+        - Quản lý tài chính
+      summary: FR-15.03 - Kiểm tra trạng thái thanh toán
+
+      parameters:
+        - name: transactionId
+          in: path
+          required: true
+          schema: { type: string, example: "TXN_001" }
+      responses:
+        '200':
+          description: Cho phép Tài chính/Kế toán kiểm tra trạng thái của các giao dịch
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string, example: "SUCCESS" }
+    

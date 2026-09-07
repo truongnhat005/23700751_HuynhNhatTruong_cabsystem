@@ -1,0 +1,29 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Phân quyền người dùng (FR-01.07)
+  description: Đặc tả API cho yêu cầu chức năng FR-01.07 - Phân quyền người dùng
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /auth/roles/permissions:
+    get:
+      tags:
+        - Quản lý tài khoản
+      summary: FR-01.07 - Phân quyền người dùng
+
+      parameters:
+        - name: role
+          in: query
+          required: true
+          schema: { type: string, enum: [CUSTOMER, DRIVER, OPERATOR, ACCOUNTANT] }
+      responses:
+        '200':
+          description: Danh sách quyền theo vai trò
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { type: string }
+    

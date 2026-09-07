@@ -1,0 +1,24 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Xác định tài xế sẵn sàng (FR-05.01)
+  description: Đặc tả API cho yêu cầu chức năng FR-05.01 - Xác định tài xế sẵn sàng
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /dispatch/available-drivers:
+    get:
+      tags:
+        - Tự động tìm tài xế
+      summary: FR-05.01 - Xác định tài xế sẵn sàng
+
+      responses:
+        '200':
+          description: Danh sách tài xế đang sẵn sàng nhận chuyến
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { type: object }
+    

@@ -1,0 +1,37 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Từ chối chuyến (FR-06.04)
+  description: Đặc tả API cho yêu cầu chức năng FR-06.04 - Từ chối chuyến
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /driver/trips/{tripId}/reject:
+    post:
+      tags:
+        - Xử lý nhận chuyến
+      summary: FR-06.04 - Từ chối chuyến
+
+      parameters:
+        - name: tripId
+          in: path
+          required: true
+          schema: { type: string, example: "TRIP_001" }
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason: { type: string, example: "Đang bận" }
+      responses:
+        '200':
+          description: Tài xế từ chối chuyến
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string, example: "Đã từ chối chuyến" }
+    

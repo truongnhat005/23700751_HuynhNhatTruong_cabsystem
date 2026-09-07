@@ -1,0 +1,30 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Hoàn thành chuyến (FR-08.06)
+  description: Đặc tả API cho yêu cầu chức năng FR-08.06 - Hoàn thành chuyến
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /trips/{tripId}/status/completed:
+    patch:
+      tags:
+        - Quản lý trạng thái chuyến
+      summary: FR-08.06 - Hoàn thành chuyến
+
+      parameters:
+        - name: tripId
+          in: path
+          required: true
+          schema: { type: string, example: "TRIP_001" }
+      responses:
+        '200':
+          description: Tài xế xác nhận hoàn thành chuyến đi
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string, example: "COMPLETED" }
+    

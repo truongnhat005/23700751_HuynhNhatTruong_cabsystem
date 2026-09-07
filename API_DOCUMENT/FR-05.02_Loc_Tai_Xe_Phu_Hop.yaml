@@ -1,0 +1,33 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Lọc tài xế phù hợp (FR-05.02)
+  description: Đặc tả API cho yêu cầu chức năng FR-05.02 - Lọc tài xế phù hợp
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /dispatch/filter-drivers:
+    post:
+      tags:
+        - Tự động tìm tài xế
+      summary: FR-05.02 - Lọc tài xế phù hợp
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [vehicleType]
+              properties:
+                vehicleType: { type: string, example: "4_SEATS" }
+      responses:
+        '200':
+          description: Danh sách tài xế phù hợp tiêu chí
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { type: object }
+    

@@ -1,0 +1,30 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Tra cứu giao dịch (FR-11.04)
+  description: Đặc tả API cho yêu cầu chức năng FR-11.04 - Tra cứu giao dịch
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /transactions/lookup:
+    get:
+      tags:
+        - Quản lý giao dịch
+      summary: FR-11.04 - Tra cứu giao dịch
+
+      parameters:
+        - name: transactionId
+          in: query
+          schema: { type: string, example: "TXN_001" }
+      responses:
+        '200':
+          description: Cho phép tra cứu thông tin và lịch sử giao dịch
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transactionId: { type: string, example: "TXN_001" }
+                  amount: { type: number, example: 65000 }
+    

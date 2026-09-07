@@ -1,0 +1,34 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Xác định loại dịch vụ (FR-09.01)
+  description: Đặc tả API cho yêu cầu chức năng FR-09.01 - Xác định loại dịch vụ
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /fares/service-type:
+    post:
+      tags:
+        - Tính cước
+      summary: FR-09.01 - Xác định loại dịch vụ
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [serviceType]
+              properties:
+                serviceType: { type: string, example: "4_SEATS" }
+      responses:
+        '200':
+          description: Xác định loại dịch vụ hoặc loại xe được sử dụng trong chuyến
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  baseRate: { type: number, example: 25000 }
+    

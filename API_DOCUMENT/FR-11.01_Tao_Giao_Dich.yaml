@@ -1,0 +1,35 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Tạo giao dịch (FR-11.01)
+  description: Đặc tả API cho yêu cầu chức năng FR-11.01 - Tạo giao dịch
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /transactions/create:
+    post:
+      tags:
+        - Quản lý giao dịch
+      summary: FR-11.01 - Tạo giao dịch
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [tripId, amount]
+              properties:
+                tripId: { type: string, example: "TRIP_001" }
+                amount: { type: number, example: 65000 }
+      responses:
+        '201':
+          description: Tạo thông tin giao dịch tương ứng với khoản thanh toán của chuyến đi
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transactionId: { type: string, example: "TXN_001" }
+    

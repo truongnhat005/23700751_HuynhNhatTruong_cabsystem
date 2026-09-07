@@ -1,0 +1,24 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Quản lý khách hàng (FR-14.01)
+  description: Đặc tả API cho yêu cầu chức năng FR-14.01 - Quản lý khách hàng
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+
+paths:
+  /operations/customers:
+    get:
+      tags:
+        - Quản lý vận hành
+      summary: FR-14.01 - Quản lý khách hàng
+
+      responses:
+        '200':
+          description: Cho phép nhân viên vận hành quản lý thông tin và trạng thái tài khoản khách hàng
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { type: object }
+    
