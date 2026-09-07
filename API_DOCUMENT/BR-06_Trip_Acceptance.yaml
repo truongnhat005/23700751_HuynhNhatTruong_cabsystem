@@ -1,0 +1,84 @@
+openapi: 3.0.3
+info:
+  title: CAB - BR-06 Xử lý nhận chuyến
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+paths:
+  /driver/notifications/incoming-trip:
+    get:
+      tags: [BR-06 – Xử lý nhận chuyến]
+      summary: FR-06.01 - Nhận thông báo chuyến mới
+      parameters:
+        - name: driverId
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Bản tin chuyến xe mới
+  /driver/trips/{tripId}/details:
+    get:
+      tags: [BR-06 – Xử lý nhận chuyến]
+      summary: FR-06.02 - Xem thông tin chuyến
+      parameters:
+        - name: tripId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Chi tiết điểm đón, điểm đến và giá cước
+  /driver/trips/{tripId}/accept:
+    post:
+      tags: [BR-06 – Xử lý nhận chuyến]
+      summary: FR-06.03 - Chấp nhận chuyến
+      parameters:
+        - name: tripId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Đã chấp nhận chuyến đi
+  /driver/trips/{tripId}/reject:
+    post:
+      tags: [BR-06 – Xử lý nhận chuyến]
+      summary: FR-06.04 - Từ chối chuyến
+      parameters:
+        - name: tripId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason: { type: string }
+      responses:
+        '200':
+          description: Đã từ chối chuyến đi
+  /driver/trips/{tripId}/response-log:
+    post:
+      tags: [BR-06 – Xử lý nhận chuyến]
+      summary: FR-06.05 - Ghi nhận phản hồi
+      parameters:
+        - name: tripId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [action, responseTimeSeconds]
+              properties:
+                action: { type: string, enum: [ACCEPT, REJECT, TIMEOUT] }
+                responseTimeSeconds: { type: integer }
+      responses:
+        '201':
+          description: Ghi nhận log phản hồi thành công
