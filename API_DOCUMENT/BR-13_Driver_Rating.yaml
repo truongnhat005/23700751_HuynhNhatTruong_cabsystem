@@ -1,0 +1,73 @@
+openapi: 3.0.3
+info:
+  title: CAB - BR-13 Đánh giá tài xế
+  version: 1.0.0
+servers:
+  - url: https://api.cabsystem.com/v1
+paths:
+  /reviews/{tripId}/create:
+    post:
+      tags: [BR-13 – Đánh giá tài xế]
+      summary: FR-13.01 - Đánh giá tài xế
+      parameters:
+        - name: tripId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '201':
+          description: Mở phiên gửi đánh giá tài xế
+  /reviews/{tripId}/score:
+    post:
+      tags: [BR-13 – Đánh giá tài xế]
+      summary: FR-13.02 - Chấm điểm tài xế
+      parameters:
+        - name: tripId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [score]
+              properties:
+                score: { type: integer, minimum: 1, maximum: 5 }
+      responses:
+        '200':
+          description: Điểm đánh giá (sao) đã được ghi nhận
+  /reviews/{tripId}/feedback:
+    post:
+      tags: [BR-13 – Đánh giá tài xế]
+      summary: FR-13.03 - Nhập nhận xét
+      parameters:
+        - name: tripId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [comments]
+              properties:
+                comments: { type: string }
+      responses:
+        '200':
+          description: Nội dung nhận xét đã lưu
+  /reviews/{tripId}/save:
+    post:
+      tags: [BR-13 – Đánh giá tài xế]
+      summary: FR-13.04 - Lưu đánh giá
+      parameters:
+        - name: tripId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Kết quả đánh giá được lưu trữ chính thức
