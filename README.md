@@ -269,6 +269,304 @@ Functional Requirements – CAB System
 | **FR-16.03** | BR-16 – Báo cáo hoạt động | **Báo cáo tỷ lệ hoàn thành** | Hệ thống phải cung cấp tỷ lệ chuyến hoàn thành.                          |
 | **FR-16.04** | BR-16 – Báo cáo hoạt động | **Báo cáo tỷ lệ hủy**        | Hệ thống phải cung cấp tỷ lệ chuyến bị hủy.                              |
 | **FR-16.05** | BR-16 – Báo cáo hoạt động | **Báo cáo hiệu quả tài xế**  | Hệ thống phải cung cấp dữ liệu đánh giá hiệu quả hoạt động của tài xế.   |
+**Acceptance Criteria**
+---
+
+### **FR-01.01 – Đăng ký tài khoản khách hàng**
+
+* **AC-01:** Hệ thống phải cho phép khách hàng nhập thông tin đăng ký bao gồm họ tên, email/số điện thoại và mật khẩu.
+* **AC-02:** Hệ thống phải kiểm tra tính hợp lệ và độ duy nhất của email/số điện thoại trước khi tạo tài khoản.
+* **AC-03:** Hệ thống phải lưu trữ thông tin tài khoản khách hàng mới vào cơ sở dữ liệu sau khi đăng ký thành công.
+* **AC-04:** Hệ thống phải hiển thị thông báo lỗi khi thông tin đăng ký không hợp lệ hoặc bị trùng lặp.
+
+### **FR-01.02 – Đăng nhập**
+
+* **AC-01:** Hệ thống phải cho phép khách hàng, tài xế và nhân viên nhập thông tin đăng nhập (tài khoản và mật khẩu).
+* **AC-02:** Hệ thống phải xác thực thông tin đăng nhập với cơ sở dữ liệu.
+* **AC-03:** Hệ thống phải chuyển hướng người dùng đến giao diện tương ứng với vai trò sau khi đăng nhập thành công.
+* **AC-04:** Hệ thống phải hiển thị thông báo lỗi nếu thông tin đăng nhập không chính xác.
+
+### **FR-01.03 – Đăng xuất**
+
+* **AC-01:** Hệ thống phải cung cấp chức năng đăng xuất cho người dùng đã xác thực.
+* **AC-02:** Hệ thống phải hủy phiên làm việc hiện tại của người dùng sau khi đăng xuất.
+* **AC-03:** Hệ thống phải chuyển hướng người dùng về màn hình đăng nhập sau khi kết thúc phiên.
+
+### **FR-01.04 – Cập nhật thông tin cá nhân**
+
+* **AC-01:** Hệ thống phải cho phép người dùng chỉnh sửa thông tin cá nhân của mình.
+* **AC-02:** Hệ thống phải kiểm tra tính hợp lệ của dữ liệu mới trước khi lưu.
+* **AC-03:** Hệ thống phải cập nhật và lưu trữ thông tin thay đổi vào cơ sở dữ liệu.
+
+### **FR-01.05 – Quản lý tài khoản tài xế**
+
+* **AC-01:** Hệ thống phải cho phép tài xế tự đăng ký hoặc nhân viên vận hành tạo tài khoản tài xế mới.
+* **AC-02:** Hệ thống phải cho phép cập nhật hồ sơ chi tiết của tài xế.
+* **AC-03:** Hệ thống phải quản lý trạng thái kích hoạt hoặc khóa tài khoản tài xế.
+
+### **FR-01.06 – Xác thực người dùng**
+
+* **AC-01:** Hệ thống phải yêu cầu xác thực danh tính trước khi cho phép truy cập các chức năng cần quyền.
+* **AC-02:** Hệ thống phải từ chối truy cập và yêu cầu đăng nhập lại nếu phiên làm việc hết hạn hoặc không hợp lệ.
+
+### **FR-01.07 – Phân quyền người dùng**
+
+* **AC-01:** Hệ thống phải phân chia quyền hạn rõ ràng giữa khách hàng, tài xế và nhân viên vận hành.
+* **AC-02:** Hệ thống phải ngăn chặn người dùng truy cập các tính năng nằm ngoài phạm vi phân quyền của họ.
+
+---
+
+### **FR-02.01 – Xem danh sách khách hàng**
+
+* **AC-01:** Hệ thống phải hiển thị danh sách toàn bộ khách hàng cho nhân viên vận hành.
+* **AC-02:** Hệ thống phải hỗ trợ tìm kiếm và lọc danh sách khách hàng theo các tiêu chí cơ bản.
+
+### **FR-02.02 – Xem thông tin khách hàng**
+
+* **AC-01:** Hệ thống phải hiển thị thông tin chi tiết của một khách hàng được chọn.
+* **AC-02:** Hệ thống phải đảm bảo chỉ hiển thị dữ liệu cho nhân viên có quyền.
+
+### **FR-02.03 – Cập nhật thông tin khách hàng**
+
+* **AC-01:** Hệ thống phải cho phép nhân viên vận hành chỉnh sửa thông tin của khách hàng khi cần thiết.
+* **AC-02:** Hệ thống phải lưu lại lịch sử hoặc thông tin thay đổi mới nhất của khách hàng.
+
+### **FR-02.04 – Quản lý trạng thái tài khoản**
+
+* **AC-01:** Hệ thống phải cho phép nhân viên thay đổi trạng thái hoạt động của tài khoản khách hàng (Hoạt động / Bị khóa).
+* **AC-02:** Hệ thống phải ngăn chặn khách hàng bị khóa thực hiện đăng nhập hoặc đặt xe.
+
+### **FR-02.05 – Xem lịch sử chuyến đi**
+
+* **AC-01:** Hệ thống phải lưu trữ toàn bộ lịch sử các chuyến đi của khách hàng.
+* **AC-02:** Hệ thống phải hiển thị chi tiết lịch sử chuyến đi khi khách hàng hoặc nhân viên yêu cầu.
+
+---
+
+### **FR-03.01 – Quản lý hồ sơ tài xế**
+
+* **AC-01:** Hệ thống phải cho phép cập nhật thông tin cá nhân và giấy tờ pháp lý trong hồ sơ tài xế.
+* **AC-02:** Hệ thống phải lưu trữ đầy đủ thông tin hồ sơ tài xế để phục vụ công tác quản lý.
+
+### **FR-03.02 – Quản lý phương tiện**
+
+* **AC-01:** Hệ thống phải cho phép tài xế cập nhật thông tin phương tiện sử dụng (loại xe, biển số, dòng xe).
+* **AC-02:** Hệ thống phải liên kết thông tin phương tiện chính xác với hồ sơ của tài xế.
+
+### **FR-03.03 – Cập nhật trạng thái hoạt động**
+
+* **AC-01:** Hệ thống phải cho phép tài xế chuyển đổi trạng thái giữa sẵn sàng nhận chuyến (`Ready`) và không sẵn sàng.
+* **AC-02:** Hệ thống chỉ đưa tài xế vào danh sách tìm kiếm chuyến khi tài xế ở trạng thái sẵn sàng.
+
+### **FR-03.04 – Cập nhật vị trí tài xế**
+
+* **AC-01:** Hệ thống phải liên tục ghi nhận tọa độ vị trí hiện tại của tài xế theo thời gian thực.
+* **AC-02:** Hệ thống phải sử dụng dữ liệu vị trí này để tính toán khoảng cách phục vụ việc điều phối chuyến.
+
+### **FR-03.05 – Xem thông tin tài xế**
+
+* **AC-01:** Hệ thống phải cho phép nhân viên vận hành tra cứu thông tin chi tiết và trạng thái hiện tại của tài xế.
+
+---
+
+### **FR-04.01 – Nhập điểm đón**
+
+* **AC-01:** Hệ thống phải cho phép khách hàng nhập địa chỉ hoặc chọn vị trí điểm đón trên bản đồ.
+* **AC-02:** Hệ thống phải kiểm tra tính hợp lệ của vị trí điểm đón.
+
+### **FR-04.02 – Nhập điểm đến**
+
+* **AC-01:** Hệ thống phải cho phép khách hàng nhập địa chỉ hoặc chọn vị trí điểm đến trên bản đồ.
+* **AC-02:** Hệ thống phải xác định thành công tọa độ điểm đến để tính toán hành trình.
+
+### **FR-04.03 – Chọn loại xe**
+
+* **AC-01:** Hệ thống phải hiển thị các loại xe/dịch vụ khả dụng để khách hàng lựa chọn.
+* **AC-02:** Hệ thống phải ghi nhận chính xác loại xe mà khách hàng đã chọn cho chuyến đi.
+
+### **FR-04.04 – Tạo yêu cầu đặt xe**
+
+* **AC-01:** Hệ thống phải cho phép khách hàng xác nhận và gửi đi yêu cầu đặt xe sau khi đã điền đủ thông tin.
+* **AC-02:** Hệ thống phải khởi tạo tiến trình tìm kiếm tài xế ngay khi yêu cầu được gửi thành công.
+
+### **FR-04.05 – Tạo mã chuyến**
+
+* **AC-01:** Hệ thống phải tự động sinh mã định danh duy nhất (Mã chuyến) cho mỗi yêu cầu đặt xe mới.
+* **AC-02:** Mã chuyến phải được gắn kết xuyên suốt với mọi thông tin, trạng thái và giao dịch của chuyến đi đó.
+
+### **FR-04.06 – Hủy yêu cầu đặt xe**
+
+* **AC-01:** Hệ thống phải cho phép khách hàng hủy yêu cầu đặt xe trước khi tài xế đến đón theo chính sách.
+* **AC-02:** Hệ thống phải cập nhật trạng thái chuyến thành "Đã hủy" và dừng tiến trình tìm kiếm tài xế.
+
+---
+
+### **FR-05.01 – Xác định tài xế sẵn sàng**
+
+* **AC-01:** Hệ thống phải lọc ra danh sách các tài xế đang bật trạng thái sẵn sàng nhận chuyến trong hệ thống.
+
+### **FR-05.02 – Lọc tài xế phù hợp**
+
+* **AC-01:** Hệ thống phải lọc danh sách tài xế dựa trên loại xe khớp với yêu cầu đặt xe của khách hàng.
+
+### **FR-05.03 – Xác định khoảng cách**
+
+* **AC-01:** Hệ thống phải tính toán khoảng cách đường đi giữa vị trí hiện tại của các tài xế và điểm đón của khách hàng.
+
+### **FR-05.04 – Ưu tiên tài xế gần**
+
+* **AC-01:** Hệ thống phải ưu tiên lựa chọn tài xế có khoảng cách gần nhất với điểm đón để gửi yêu cầu trước.
+
+### **FR-05.05 – Gửi yêu cầu chuyến**
+
+* **AC-01:** Hệ thống phải gửi thông báo yêu cầu nhận chuyến đến thiết bị của tài xế được chọn.
+* **AC-02:** Hệ thống phải kích hoạt bộ đếm thời gian chờ phản hồi (Timeout) cho yêu cầu đó.
+
+### **FR-05.06 – Tìm tài xế tiếp theo**
+
+* **AC-01:** Hệ thống phải tự động chuyển yêu cầu sang tài xế phù hợp tiếp theo nếu tài xế hiện tại từ chối hoặc hết giờ không phản hồi.
+
+### **FR-05.07 – Thông báo không tìm được tài xế**
+
+* **AC-01:** Hệ thống phải gửi thông báo cho khách hàng khi đã quét toàn bộ tài xế mà không có ai nhận chuyến.
+
+---
+
+### **FR-06.01 – Nhận thông báo chuyến mới**
+
+* **AC-01:** Hệ thống phải hiển thị thông báo popup hoặc âm thanh cảnh báo trên ứng dụng của tài xế khi có chuyến mới.
+
+### **FR-06.02 – Xem thông tin chuyến**
+
+* **AC-01:** Hệ thống phải cho phép tài xế xem thông tin chi tiết về điểm đón, điểm đến và loại xe trước khi đưa ra quyết định.
+
+### **FR-06.03 – Chấp nhận chuyến**
+
+* **AC-01:** Hệ thống phải cho phép tài xế bấm nhận chuyến để nhận phân công chính thức.
+* **AC-02:** Hệ thống phải cập nhật trạng thái chuyến thành "Đã nhận chuyến" và khóa yêu cầu lại.
+
+### **FR-06.04 – Từ chối chuyến**
+
+* **AC-01:** Hệ thống phải cho phép tài xế bấm từ chối yêu cầu chuyến đi.
+* **AC-02:** Hệ thống phải ghi nhận thao tác từ chối và kích hoạt luồng tìm tài xế thay thế ngay lập tức.
+
+### **FR-06.05 – Ghi nhận phản hồi**
+
+* **AC-01:** Hệ thống phải lưu lại kết quả phản hồi (đồng ý hoặc từ chối) kèm theo thời gian phản hồi của tài xế.
+
+---
+
+### **FR-07.01 – Xem thông tin tài xế**
+
+* **AC-01:** Hệ thống phải hiển thị họ tên, số điện thoại và hình ảnh của tài xế cho khách hàng sau khi có tài xế nhận chuyến.
+
+### **FR-07.02 – Xem thông tin phương tiện**
+
+* **AC-01:** Hệ thống phải hiển thị thông tin biển số xe, dòng xe và màu sắc phương tiện cho khách hàng.
+
+### **FR-07.03 – Theo dõi vị trí tài xế**
+
+* **AC-01:** Hệ thống phải cập nhật và hiển thị trực quan vị trí thời gian thực của tài xế trên giao diện bản đồ của khách hàng.
+
+### **FR-07.04 – Xem thời gian dự kiến**
+
+* **AC-01:** Hệ thống phải tính toán và hiển thị thời gian dự kiến (ETA) tài xế di chuyển đến điểm đón.
+
+### **FR-07.05 – Xem trạng thái chuyến**
+
+* **AC-01:** Hệ thống phải hiển thị trạng thái hiện tại của chuyến đi liên tục cho khách hàng nắm bắt.
+
+---
+
+### **FR-08.01 đến FR-08.07 – Quản lý trạng thái chuyến**
+
+* **AC-01:** Hệ thống phải cho phép ghi nhận trạng thái khi đang tìm tài xế.
+* **AC-02:** Hệ thống phải cho phép cập nhật trạng thái khi tài xế xác nhận đã đến điểm đón.
+* **AC-03:** Hệ thống phải cho phép cập nhật trạng thái khi tài xế đã đón khách lên xe.
+* **AC-04:** Hệ thống phải cho phép cập nhật trạng thái đang di chuyển đến điểm đến.
+* **AC-05:** Hệ thống phải cho phép tài xế xác nhận hoàn thành chuyến đi khi đến nơi.
+* **AC-06:** Hệ thống phải đảm bảo việc cập nhật trạng thái phải tuân thủ đúng tuần tự, không cho phép nhảy cóc trạng thái.
+* **AC-07:** Hệ thống phải lưu trữ toàn bộ lịch sử thay đổi trạng thái của chuyến đi vào cơ sở dữ liệu.
+
+---
+
+### **FR-09.01 đến FR-09.04 – Tính cước**
+
+* **AC-01:** Hệ thống phải xác định chính xác loại dịch vụ/loại xe đã sử dụng trong chuyến.
+* **AC-02:** Hệ thống phải thu thập đầy đủ thông tin quãng đường và thời gian thực tế của chuyến đi.
+* **AC-03:** Hệ thống phải tự động tính toán tổng số tiền cước dựa trên quy tắc đơn giá đã thiết lập.
+* **AC-04:** Hệ thống phải hiển thị rõ ràng số tiền cước cần thanh toán cho khách hàng sau khi kết thúc chuyến.
+
+---
+
+### **FR-10.01 đến FR-10.05 – Thanh toán**
+
+* **AC-01:** Hệ thống phải cho phép khách hàng lựa chọn phương thức thanh toán (tiền mặt hoặc trực tuyến).
+* **AC-02:** Hệ thống phải ghi nhận thông tin khi chọn phương thức thanh toán tiền mặt.
+* **AC-03:** Hệ thống phải kết nối với cổng thanh toán điện tử bên ngoài để thực hiện giao dịch trực tuyến.
+* **AC-04:** Hệ thống phải tiếp nhận và xử lý kết quả trả về từ cổng thanh toán.
+* **AC-05:** Hệ thống phải thông báo lỗi và hỗ trợ xử lý lại khi thanh toán trực tuyến thất bại.
+
+---
+
+### **FR-11.01 đến FR-11.05 – Quản lý giao dịch**
+
+* **AC-01:** Hệ thống phải tự động tạo bản ghi giao dịch tương ứng với khoản thanh toán của chuyến đi.
+* **AC-02:** Hệ thống phải lưu trữ mã giao dịch định danh duy nhất phục vụ công tác đối soát.
+* **AC-03:** Hệ thống phải cập nhật trạng thái giao dịch (Thành công / Thất bại / Đang xử lý).
+* **AC-04:** Hệ thống phải cung cấp tính năng cho phép tra cứu lịch sử các giao dịch.
+* **AC-05:** Hệ thống phải lưu vết thông tin chi tiết của các giao dịch thanh toán không thành công.
+
+---
+
+### **FR-12.01 đến FR-12.06 – Thông báo**
+
+* **AC-01:** Hệ thống phải gửi thông báo cho khách hàng khi yêu cầu đặt xe được tiếp nhận.
+* **AC-02:** Hệ thống phải gửi thông báo cho khách hàng khi có tài xế nhận chuyến.
+* **AC-03:** Hệ thống phải gửi thông báo khi tài xế đã đến điểm đón.
+* **AC-04:** Hệ thống phải gửi thông báo khi chuyến đi hoàn thành.
+* **AC-05:** Hệ thống phải gửi thông báo về kết quả thanh toán cho khách hàng.
+* **AC-06:** Hệ thống phải gửi thông báo có chuyến mới phù hợp đến thiết bị của tài xế.
+
+---
+
+### **FR-13.01 đến FR-13.04 – Đánh giá tài xế**
+
+* **AC-01:** Hệ thống phải cho phép khách hàng mở giao diện đánh giá sau khi chuyến đi hoàn tất.
+* **AC-02:** Hệ thống phải cho phép khách hàng chấm điểm số sao (từ 1 đến 5 sao).
+* **AC-03:** Hệ thống phải cho phép khách hàng nhập thêm nội dung nhận xét văn bản tùy chọn.
+* **AC-04:** Hệ thống phải lưu kết quả đánh giá liên kết chặt chẽ với chuyến đi và tài xế đó, đồng thời chặn đánh giá trùng lặp.
+
+---
+
+### **FR-14.01 đến FR-14.07 – Quản lý vận hành**
+
+* **AC-01:** Hệ thống phải cung cấp giao diện cho nhân viên quản lý thông tin khách hàng.
+* **AC-02:** Hệ thống phải cho phép nhân viên quản lý thông tin và hồ sơ tài xế.
+* **AC-03:** Hệ thống phải cho phép nhân viên quản lý thông tin phương tiện.
+* **AC-04:** Hệ thống phải cho phép nhân viên theo dõi danh sách các chuyến đi đang diễn ra theo thời gian thực.
+* **AC-05:** Hệ thống cho phép kiểm tra trạng thái hoạt động trực tuyến của tài xế.
+* **AC-06:** Hệ thống phải hỗ trợ nhân viên can thiệp xử lý các trường hợp chuyến đi phát sinh lỗi/sự cố.
+* **AC-07:** Hệ thống phải cho phép tra cứu toàn bộ lịch sử các chuyến đi trong hệ thống.
+
+---
+
+### **FR-15.01 đến FR-15.04 – Quản lý tài chính**
+
+* **AC-01:** Hệ thống phải cho phép bộ phận Tài chính/Kế toán tra cứu các giao dịch phát sinh.
+* **AC-02:** Hệ thống phải tổng hợp và cung cấp dữ liệu doanh thu từ các chuyến đi.
+* **AC-03:** Hệ thống phải hỗ trợ kiểm tra trạng thái chi tiết của từng khoản thanh toán.
+* **AC-04:** Hệ thống phải cho phép lọc và xem danh sách các giao dịch thanh toán thất bại để xử lý đối soát.
+
+---
+
+### **FR-16.01 đến FR-16.05 – Báo cáo hoạt động**
+
+* **AC-01:** Hệ thống phải cung cấp báo cáo tổng hợp số lượng chuyến đi theo khoảng thời gian tùy chọn (ngày, tháng, năm).
+* **AC-02:** Hệ thống phải cung cấp báo cáo tổng doanh thu theo khoảng thời gian.
+* **AC-03:** Hệ thống phải tính toán và hiển thị tỷ lệ chuyến đi hoàn thành thành công.
+* **AC-04:** Hệ thống phải tính toán và hiển thị tỷ lệ chuyến đi bị hủy.
+* **AC-05:** Hệ thống phải cung cấp dữ liệu thống kê đánh giá hiệu quả hoạt động của đội ngũ tài xế.
 
 # Giai đoạn 7: Vẽ usecase 
 
