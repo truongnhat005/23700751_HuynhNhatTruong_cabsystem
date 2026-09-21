@@ -1,4 +1,4 @@
-<img width="2902" height="8192" alt="CAB Booking and Payment Flow-2026-09-21-124913" src="https://github.com/user-attachments/assets/000373dc-bc3d-4433-a567-ae9c917046fb" /># 23700751_HuynhNhatTruong_CABSYSTEM
+# 23700751_HuynhNhatTruong_CABSYSTEM
 # Giai đoạn 1
 | STT | Yếu điểm                                             | Phân tích                                                                                                                                                        |
 | --- | ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
