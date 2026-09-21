@@ -1,4 +1,4 @@
-# 23700751_HuynhNhatTruong_CABSYSTEM
+<img width="2902" height="8192" alt="CAB Booking and Payment Flow-2026-09-21-124913" src="https://github.com/user-attachments/assets/000373dc-bc3d-4433-a567-ae9c917046fb" /># 23700751_HuynhNhatTruong_CABSYSTEM
 # Giai đoạn 1
 | STT | Yếu điểm                                             | Phân tích                                                                                                                                                        |
 | --- | ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1189,3 +1189,38 @@ flowchart TD
 | **BR-RULE-14** | Quy tắc quản lý tài chính | Bộ phận Tài chính, CAB System | Doanh thu được tổng hợp từ các giao dịch thành công. Chỉ nhân viên tài chính được phép xem, thống kê và đối soát dữ liệu tài chính. |
 | **BR-RULE-15** | Quy tắc báo cáo hoạt động | Ban giám đốc, CAB System | Báo cáo hoạt động chỉ hiển thị dữ liệu đã tổng hợp, bao gồm số chuyến đi, doanh thu, số tài xế hoạt động, số khách hàng và tỷ lệ hủy chuyến theo ngày, tháng hoặc năm. |
 
+**Buổi 4**
+# CAB System - Domain-Driven Design (DDD)
+---
+## 1. Bảng phân rã Subdomain (Core, Supporting, Generic)
+| STT | Subdomain | Loại Domain | Mô tả ranh giới nghiệp vụ |
+| :---: | :--- | :--- | :--- |
+| 1 | **User & Identity Domain** | Supporting | Quản lý xác thực (Authentication) và thông tin gốc của người dùng. |
+| 2 | **Customer Domain** | Supporting | Quản lý thông tin chuyên biệt và lịch sử của hành khách. |
+| 3 | **Driver Domain** | Supporting | Quản lý hồ sơ, phương tiện và theo dõi tọa độ GPS của tài xế. |
+| 4 | **Ride Booking & Dispatch Domain** | Core Domain | Xử lý thuật toán ghép cặp và điều phối tài xế. |
+| 5 | **Trip Lifecycle Domain** | Core Domain | Quản lý xuyên suốt vòng đời trạng thái chuyến đi đến khi hoàn thành. |
+| 6 | **Billing & Payment Domain** | Supporting | Tính cước tự động, tích hợp cổng thanh toán và quản lý giao dịch. |
+| 7 | **Notification Domain** | Generic | Phát tán thông báo thời gian thực (Push, In-app, SMS). |
+| 8 | **Review Domain** | Supporting | Xử lý việc chấm điểm sao và nhận xét sau chuyến đi. |
+| 9 | **Operation & Analytics Domain** | Supporting | Cung cấp giao diện quản trị, giám sát vận hành và báo cáo dữ liệu. |
+
+<img width="2902" height="8192" alt="CAB Booking and Payment Flow-2026-09-21-124209" src="https://github.com/user-attachments/assets/ae2f1903-e2a2-493e-8ddf-1ba98ce6ec4f" />
+
+---
+## 2. Bảng liên kết chính giữa các Subdomain
+
+| STT | Subdomain liên kết | Loại liên kết DDD | Nghiệp vụ |
+| :---: | :--- | :--- | :--- |
+| 1 | User & Identity $\rightarrow$ Customer | Customer–Supplier | Liên kết dữ liệu tài khoản định danh sang hồ sơ khách hàng. |
+| 2 | User & Identity $\rightarrow$ Driver | Customer–Supplier | Liên kết dữ liệu tài khoản định danh sang hồ sơ tài xế. |
+| 3 | Customer $\rightarrow$ Ride Booking & Dispatch | Partnership | Khách hàng khởi tạo yêu cầu đặt xe. |
+| 4 | Driver $\rightarrow$ Ride Booking & Dispatch | Customer–Supplier | Cung cấp trạng thái sẵn sàng (`Ready`) và tọa độ GPS. |
+| 5 | Ride Booking & Dispatch $\rightarrow$ Trip Lifecycle | Partnership | Khởi tạo chuyến đi sau khi ghép nối thành công tài xế. |
+| 6 | Trip Lifecycle $\rightarrow$ Billing & Payment | Published Event | Kích hoạt sự kiện tính cước ngay khi chuyến đi hoàn thành. |
+| 7 | Billing & Payment $\rightarrow$ Notification | Published Event | Gửi thông báo kết quả giao dịch thanh toán cho người dùng. |
+| 8 | Trip Lifecycle $\rightarrow$ Notification | Published Event | Gửi thông báo cập nhật trạng thái chuyến đi. |
+| 9 | Trip Lifecycle $\rightarrow$ Review | Published Event | Mở tính năng đánh giá sau khi chuyến hoàn tất. |
+| 10 | Review $\rightarrow$ Driver | Partnership | Cập nhật điểm đánh giá trung bình vào hồ sơ tài xế. |
+| 11 | Billing & Payment $\rightarrow$ Operation & Analytics | Customer–Supplier | Đồng bộ dữ liệu doanh thu và giao dịch tài chính. |
+| 12 | Trip Lifecycle $\rightarrow$ Operation & Analytics | Customer–Supplier | Tổng hợp báo cáo chuyến đi, tỷ lệ hủy và thống kê vận hành. |
