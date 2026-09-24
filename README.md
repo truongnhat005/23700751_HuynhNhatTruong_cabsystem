@@ -1205,7 +1205,172 @@ flowchart TD
 | 8 | **Review Domain** | Supporting | Xử lý việc chấm điểm sao và nhận xét sau chuyến đi. |
 | 9 | **Operation & Analytics Domain** | Supporting | Cung cấp giao diện quản trị, giám sát vận hành và báo cáo dữ liệu. |
 
-<img width="2902" height="8192" alt="CAB Booking and Payment Flow-2026-09-21-124209" src="https://github.com/user-attachments/assets/ae2f1903-e2a2-493e-8ddf-1ba98ce6ec4f" />
+```mermaid
+flowchart TB
+
+%% ===== HỆ THỐNG =====
+SYS["🚖 HỆ THỐNG ĐẶT XE CAB - DOMAIN"]
+
+SYS --> AUTH1
+SYS --> CUS1
+SYS --> DR1
+SYS --> BK1
+SYS --> TR1
+SYS --> PAY1
+SYS --> NT1
+SYS --> RP1
+
+%% ===== 1. XÁC THỰC =====
+subgraph AUTH["1. MIỀN XÁC THỰC & TÀI KHOẢN"]
+direction TB
+AUTH1["Đăng ký / Đăng nhập tài khoản"]
+AUTH2["Xác thực định danh người dùng"]
+AUTH3["Quản lý vai trò và phân quyền"]
+AUTH1 --> AUTH2 --> AUTH3
+end
+
+%% ===== 2. KHÁCH HÀNG =====
+subgraph CUSTOMER["2. MIỀN KHÁCH HÀNG"]
+direction TB
+CUS1["Quản lý hồ sơ khách hàng"]
+CUS2["Quản lý địa chỉ / vị trí yêu thích"]
+CUS3["Lịch sử tương tác hành khách"]
+CUS1 --> CUS2 --> CUS3
+end
+
+%% ===== 3. TÀI XẾ =====
+subgraph DRIVER["3. MIỀN TÀI XẾ & PHƯƠNG TIỆN"]
+direction LR
+
+subgraph DL["Hồ sơ tài xế"]
+direction TB
+DR1["Quản lý hồ sơ & giấy phép tài xế"]
+DR2["Khóa / Kích hoạt tài xế"]
+DR3["Quản lý vị trí GPS thời gian thực"]
+end
+
+subgraph DV["Phương tiện"]
+direction TB
+DR4["Quản lý thông tin phương tiện"]
+DR5["Quản lý trạng thái sẵn sàng (Ready)"]
+end
+
+end
+
+%% ===== 4. ĐẶT XE =====
+subgraph BOOKING["4. MIỀN ĐẶT XE & ĐIỀU PHỐI - CORE MAIN"]
+direction TB
+
+BROW1["Lựa chọn loại xe"] --- BROW2["Hủy chuyến đặt"]
+BROW3["Tạo yêu cầu đặt xe"] --- BROW4["Chọn điểm đón / điểm đến"]
+BROW5["Tìm kiếm tài xế gần nhất"] --- BROW6["Ghép tài xế (Matching)"]
+BROW7["Gửi yêu cầu nhận chuyến"] --- BROW8["Xử lý nhận / từ chối chuyến"]
+
+BK1["Luồng điều phối"]
+
+BK1 --> BROW1
+BK1 --> BROW3
+BK1 --> BROW5
+BK1 --> BROW7
+end
+
+%% ===== 5. QUẢN LÝ CHUYẾN ĐI =====
+subgraph TRIP["5. MIỀN QUẢN LÝ CHUYẾN ĐI - CORE MAIN"]
+direction TB
+
+TRTOP1["Khởi tạo vòng đời chuyến đi"] --- TRTOP2["Theo dõi hành trình chuyến đi"]
+TRMID1["Cập nhật trạng thái chuyến đi"] --- TRMID2["Xử lý sự cố chuyến đi"]
+TRBOT["Lưu trữ lịch sử chuyến đi"]
+
+TR1 --> TRTOP1
+TRTOP1 --> TRMID1
+TRTOP2 --> TRMID2
+TRMID1 --> TRBOT
+end
+
+%% ===== 6. THANH TOÁN =====
+subgraph PAYMENT["6. MIỀN THANH TOÁN"]
+direction TB
+
+PAYTOP1["Ước tính cước"] --- PAYTOP2["Quản lý phương thức thanh toán"]
+PAYMID1["Thanh toán tiền mặt / trực tuyến"] --- PAYMID2["Xử lý giao dịch & lỗi thanh toán"]
+PAYBOT["Tính cước thực tế khi hoàn thành"]
+
+PAY1 --> PAYTOP1
+PAYTOP1 --> PAYBOT
+PAYTOP2 --> PAYMID1 --> PAYMID2
+end
+
+%% ===== 7. THÔNG BÁO =====
+subgraph NOTIFY["7. MIỀN THÔNG BÁO"]
+direction TB
+NT1["Thông báo yêu cầu nhận chuyến"]
+NT2["Thông báo trạng thái chuyến đi"]
+NT3["Thông báo hủy chuyến"]
+NT4["Thông báo kết quả thanh toán"]
+end
+
+%% ===== 8. BÁO CÁO =====
+subgraph REPORT["8. MIỀN VẬN HÀNH & BÁO CÁO"]
+direction TB
+
+R1["Giám sát chuyến đang diễn ra"] --- R2["Giám sát trạng thái tài xế"]
+R3["Tra cứu giao dịch / tài chính"] --- R4["Quản lý đánh giá (Review)"]
+R5["Tổng hợp báo cáo doanh thu"]
+
+RP1 --> R1
+RP1 --> R3
+RP1 --> R5
+end
+
+%% ===== KẾT NỐI GIỮA CÁC MIỀN =====
+AUTH3 -- "Cấp phát định danh" --> CUS1
+AUTH3 -- "Cấp phát định danh" --> DR1
+
+CUS3 -- "Tạo yêu cầu đặt xe" --> BK1
+DR3 -- "Cung cấp trạng thái & GPS" --> BK1
+
+BK1 -- "Khởi tạo chuyến đi" --> TR1
+TRBOT -- "Kích hoạt tính cước" --> PAY1
+
+BK1 --> NT1
+TRMID1 --> NT2
+BROW2 --> NT3
+PAYMID2 --> NT4
+
+DR5 -- "Giám sát tài xế" --> RP1
+TRMID1 -- "Giám sát chuyến đi" --> RP1
+PAYBOT -- "Tra cứu giao dịch / doanh thu" --> RP1
+
+%% ===== MÀU SẮC (GitHub hỗ trợ) =====
+style SYS fill:#1565C0,color:#fff,stroke:#0D47A1,stroke-width:2px
+
+style AUTH1 fill:#FCE4EC
+style AUTH2 fill:#FCE4EC
+style AUTH3 fill:#FCE4EC
+
+style CUS1 fill:#E0F7FA
+style CUS2 fill:#E0F7FA
+style CUS3 fill:#E0F7FA
+
+style DR1 fill:#FFF3E0
+style DR2 fill:#FFF3E0
+style DR3 fill:#FFF3E0
+style DR4 fill:#FFF3E0
+style DR5 fill:#FFF3E0
+
+style BK1 fill:#FFF8E1
+style TR1 fill:#FFF8E1
+
+style PAY1 fill:#F3E5F5
+
+style NT1 fill:#FDECEC
+style NT2 fill:#FDECEC
+style NT3 fill:#FDECEC
+style NT4 fill:#FDECEC
+
+style RP1 fill:#FFFDE7
+```
 
 ---
 ## 2. Bảng liên kết chính giữa các Subdomain
